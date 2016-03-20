@@ -43,6 +43,7 @@
     "ember-addon"
   ],
   "dependencies": {
+    "broccoli-react": "^0.7.1",
     "ember-cli-babel": "^5.1.5"
   },
   "ember-addon": {
