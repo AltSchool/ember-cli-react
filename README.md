@@ -26,3 +26,7 @@ Then render your component in a template:
 ```handlebars
 {{react-component "say-hi" name="Alex"}}
 ```
+
+## Next Steps
+
+  * Must set `NODE_ENV=production` in order to properly minify react in production builds. Try to include this in an addon build hook.
