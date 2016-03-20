@@ -4,7 +4,11 @@ import {
   describeComponent,
   it
 } from 'ember-mocha';
+import Ember from 'ember';
 import hbs from 'htmlbars-inline-precompile';
+import sinon from 'sinon';
+
+const { run } = Ember;
 
 describeComponent(
   'react-component',
@@ -13,18 +17,52 @@ describeComponent(
     integration: true
   },
   function() {
-    // it('renders', function() {
-    //   // Set any properties with this.set('myProperty', 'value');
-    //   // Handle any actions with this.on('myAction', function(val) { ... });
-    //   // Template block usage:
-    //   // this.render(hbs`
-    //   //   {{#react-component}}
-    //   //     template content
-    //   //   {{/react-component}}
-    //   // `);
+    it('renders', function() {
+      this.render(hbs`{{react-component "say-hi"}}`);
+      expect(this.$()).to.have.length(1);
+    });
 
-    //   this.render(hbs`{{react-component}}`);
-    //   expect(this.$()).to.have.length(1);
-    // });
+    it('throws error when no component found', function() {
+      expect(() => {
+        this.render(hbs`{{react-component "missing-component"}}`);
+      }).to.throw(/Could not find react component/);
+    });
+
+    it('passes state', function() {
+      this.render(hbs`{{react-component "say-hi" name="Alex"}}`);
+      expect(this.$().text()).to.equal("Hello Alex");
+    });
+
+    it('rerenders on state change', function() {
+      this.render(hbs`{{react-component "say-hi" name="Alex"}}`);
+      this.set('name', 'Owen');
+      expect(this.$().text()).to.equal("Hello Alex");
+    });
+
+    it('rerenders when mutable state changes', function() {
+      this.render(hbs`
+        {{input value=name}}
+
+        {{react-component "say-hi" name=name}}
+      `);
+
+      this.$('input').val('Noah').trigger('change');
+      run.next(() => {
+        expect(this.$().text()).to.contain("Hello Noah");
+      });
+    });
+
+    it('can use actions from action helper', function() {
+      const clickActionHandler = sinon.stub();
+      this.on('didClickButton', clickActionHandler);
+
+      this.render(hbs`{{react-component "fancy-button"
+        onClick=(action "didClickButton")
+      }}`);
+
+      this.$('button').click();
+
+      expect(clickActionHandler.called).to.be.true;
+    });
   }
 );
