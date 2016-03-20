@@ -38,7 +38,7 @@
     "ember-load-initializers": "^0.5.0",
     "ember-resolver": "^2.0.3",
     "ember-sinon": "0.5.0",
-    "ember-try": "^0.1.2",
+    "ember-try": "0.2.2",
     "loader.js": "^4.0.0",
     "react": "^0.14.7",
     "react-dom": "^0.14.7"
@@ -52,6 +52,9 @@
     "rsvp": "^3.2.1"
   },
   "ember-addon": {
-    "configPath": "tests/dummy/config"
+    "configPath": "tests/dummy/config",
+    "versionCompatibility": {
+      "ember": ">=1.13.0 <=2.4.3"
+    }
   }
 }
