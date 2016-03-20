@@ -1,26 +1,28 @@
-# Ember-react
+# EmberReact
 
-This README outlines the details of collaborating on this Ember addon.
+Use React component hierarchies inside your Ember app.
 
-## Installation
+## Overview
 
-* `git clone` this repository
-* `npm install`
-* `bower install`
+Install the addon in your app:
 
-## Running
+```
+ember install git+ssh://git@github.com:AltSchool/ember-react.git
+```
 
-* `ember server`
-* Visit your app at http://localhost:4200.
+Write your first JSX React component:
 
-## Running Tests
+```javascript
+// app/components/say-hi.jsx
+import React from 'npm:react';
 
-* `npm test` (Runs `ember try:testall` to test your addon against multiple Ember versions)
-* `ember test`
-* `ember test --server`
+export default function(props) {
+  return <span>Hello {props.name}</span>
+}
+```
 
-## Building
+Then render your component in a template:
 
-* `ember build`
-
-For more information on using ember-cli, visit [http://www.ember-cli.com/](http://www.ember-cli.com/).
+```handlebars
+{{react-component "say-hi" name="Alex"}}
+```
