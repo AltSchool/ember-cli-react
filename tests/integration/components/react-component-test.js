@@ -34,12 +34,12 @@ describeComponent(
     });
 
     it('rerenders on state change', function() {
-      this.render(hbs`{{react-component "say-hi" name="Alex"}}`);
+      this.render(hbs`{{react-component "say-hi" name=name}}`);
       this.set('name', 'Owen');
-      expect(this.$().text()).to.equal("Hello Alex");
+      expect(this.$().text()).to.equal('Hello Owen');
     });
 
-    it('rerenders when mutable state changes', function() {
+    it('rerenders when mutable state changes', function(done) {
       this.render(hbs`
         {{input value=name}}
 
@@ -49,6 +49,7 @@ describeComponent(
       this.$('input').val('Noah').trigger('change');
       run.next(() => {
         expect(this.$().text()).to.contain("Hello Noah");
+        done();
       });
     });
 
