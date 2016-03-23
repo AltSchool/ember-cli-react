@@ -9,21 +9,31 @@ import lookupFactory from 'ember-react/utils/lookup-factory';
 const { get } = Ember;
 
 const ReactComponent = Ember.Component.extend({
-  // Name of react component to look up from `components/`
-  reactComponentName: null,
+  /**
+    The React component that this Ember component should wrap.
+
+    @property reactComponent
+    @type React.Component | Function | String
+    @default null
+   */
+  reactComponent: null,
 
   didRender: function() {
     this.renderReactComponent();
   },
 
   renderReactComponent() {
-    const componentName = get(this, 'reactComponentName');
-    const componentClass = lookupFactory(this, `component:${componentName}`);
-    const props = getMutableAttributes(get(this, 'attrs'));
+    let componentClass = get(this, 'reactComponent');
+
+    if (Ember.typeOf(componentClass) === 'string') {
+      componentClass = lookupFactory(this, `react-component:${componentClass}`);
+    }
 
     if (!componentClass) {
-      throw new Error(`Could not find react component : ${componentName}`);
+      throw new Error(`Could not find react component : ${componentClass}`);
     }
+
+    const props = getMutableAttributes(get(this, 'attrs'));
 
     ReactDOM.render(React.createElement(
       componentClass,
@@ -37,7 +47,7 @@ const ReactComponent = Ember.Component.extend({
 });
 
 ReactComponent.reopenClass({
-  positionalParams: ['reactComponentName']
+  positionalParams: ['reactComponent']
 });
 
 export default ReactComponent;
