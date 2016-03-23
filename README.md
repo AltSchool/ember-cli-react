@@ -24,7 +24,7 @@ export default function(props) {
 Then render your component in a template:
 
 ```handlebars
-{{react-component "say-hi" name="Alex"}}
+{{say-hi name="Alex"}}
 ```
 
 ## Next Steps
