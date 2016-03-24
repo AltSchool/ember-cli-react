@@ -9,21 +9,34 @@ import lookupFactory from 'ember-react/utils/lookup-factory';
 const { get } = Ember;
 
 const ReactComponent = Ember.Component.extend({
-  // Name of react component to look up from `components/`
-  reactComponentName: null,
+  /**
+    The React component that this Ember component should wrap.
+
+    @property reactComponent
+    @type React.Component | Function | String
+    @default null
+   */
+  reactComponent: Ember.computed.reads('_reactComponent'),
 
   didRender: function() {
     this.renderReactComponent();
   },
 
   renderReactComponent() {
-    const componentName = get(this, 'reactComponentName');
-    const componentClass = lookupFactory(this, `component:${componentName}`);
-    const props = getMutableAttributes(get(this, 'attrs'));
+    const componentClassOrName = get(this, 'reactComponent');
+    let componentClass;
+
+    if (Ember.typeOf(componentClassOrName) === 'string') {
+      componentClass = lookupFactory(this, `react-component:${componentClassOrName}`);
+    } else {
+      componentClass = componentClassOrName;
+    }
 
     if (!componentClass) {
-      throw new Error(`Could not find react component : ${componentName}`);
+      throw new Error(`Could not find react component : ${componentClassOrName}`);
     }
+
+    const props = getMutableAttributes(get(this, 'attrs'));
 
     ReactDOM.render(React.createElement(
       componentClass,
@@ -37,7 +50,10 @@ const ReactComponent = Ember.Component.extend({
 });
 
 ReactComponent.reopenClass({
-  positionalParams: ['reactComponentName']
+  // Some versions of Ember override positional param value to undefined when
+  // a subclass is created using `Ember.extend({ reactComponent: foo })` so
+  // instead store this value in a separate property.
+  positionalParams: ['_reactComponent']
 });
 
 export default ReactComponent;
