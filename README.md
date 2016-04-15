@@ -7,7 +7,7 @@ Use React component hierarchies inside your Ember app.
 Install the addon in your app:
 
 ```
-ember install git+ssh://git@github.com:AltSchool/ember-react.git
+ember install git+ssh://git@github.com:AltSchool/ember-cli-react.git
 ```
 
 Write your first JSX React component:

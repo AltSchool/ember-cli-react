@@ -4,7 +4,7 @@ import {
   describe,
   it
 } from 'mocha';
-import getMutableAttributes from 'ember-react/utils/get-mutable-attributes';
+import getMutableAttributes from 'ember-cli-react/utils/get-mutable-attributes';
 
 describe('utils | getMutableAttributes', function() {
   // Smoke test to ensure the way we load in ember internals doesn't throw

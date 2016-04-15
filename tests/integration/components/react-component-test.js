@@ -77,7 +77,7 @@ describeComponent(
       expect(this.$('.FancyButton')).to.have.length(1);
     });
 
-    describe('with ember-react resolver', function() {
+    describe('with ember-cli-react resolver', function() {
       it('can render react components directly', function() {
         this.render(hbs`
           {{say-hi name="Morgan"}}

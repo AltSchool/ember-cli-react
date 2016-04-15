@@ -3,4 +3,4 @@
 import React from 'npm:react';
 import ReactDOM from 'npm:react-dom';
 
-export { default } from 'ember-react/components/react-component';
+export { default } from 'ember-cli-react/components/react-component';

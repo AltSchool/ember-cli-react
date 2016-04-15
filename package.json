@@ -1,5 +1,5 @@
 {
-  "name": "ember-react",
+  "name": "ember-cli-react",
   "version": "0.1.0",
   "description": "Use React component hierarchies inside your Ember app.",
   "directories": {

@@ -2,8 +2,8 @@ import Ember from 'ember';
 import React from 'npm:react';
 import ReactDOM from 'npm:react-dom';
 
-import getMutableAttributes from 'ember-react/utils/get-mutable-attributes';
-import lookupFactory from 'ember-react/utils/lookup-factory';
+import getMutableAttributes from 'ember-cli-react/utils/get-mutable-attributes';
+import lookupFactory from 'ember-cli-react/utils/lookup-factory';
 
 
 const { get } = Ember;

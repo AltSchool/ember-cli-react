@@ -1,3 +1,3 @@
-import Resolver from 'ember-react/resolver';
+import Resolver from 'ember-cli-react/resolver';
 
 export default Resolver;

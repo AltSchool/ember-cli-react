@@ -3,7 +3,7 @@
 var RSVP = require('rsvp');
 
 module.exports = {
-  description: 'Install ember-react dependencies into your app.',
+  description: 'Install ember-cli-react dependencies into your app.',
 
   normalizeEntityName: function() {},
 

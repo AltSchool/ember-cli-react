@@ -1,5 +1,5 @@
 {
-  "name": "ember-react",
+  "name": "ember-cli-react",
   "dependencies": {
     "ember": "~2.4.1",
     "ember-cli-shims": "0.1.0",
