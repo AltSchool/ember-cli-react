@@ -1,7 +1,7 @@
 {
   "name": "ember-cli-react",
   "version": "0.1.0",
-  "description": "Use React component hierarchies inside your Ember app.",
+  "description": "Use React component hierarchies in your Ember app.",
   "directories": {
     "doc": "doc",
     "test": "tests"
@@ -15,7 +15,7 @@
   "engines": {
     "node": ">= 0.10.0"
   },
-  "author": "",
+  "author": "alex@altschool.com",
   "license": "MIT",
   "devDependencies": {
     "broccoli-asset-rev": "^2.2.0",
