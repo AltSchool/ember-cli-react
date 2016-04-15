@@ -1,4 +1,9 @@
-# EmberReact
+__This is ALPHA Software__
+
+This was built as a prototype to evaluate using react inside of our Ember apps. We are not yet using it in production. PRs and constructive questions and comments via [GitHub issues](https://github.com/AltSchool/ember-cli-react/issues/new) are highly encouraged.
+
+# ember-cli-react
+[![Circle CI](https://circleci.com/gh/AltSchool/ember-cli-react.svg?style=shield&circle-token=2195fac1d00d127511c7c197acca80a078a485a1)](https://circleci.com/gh/AltSchool/ember-cli-react)
 
 Use React component hierarchies inside your Ember app.
 
@@ -7,7 +12,7 @@ Use React component hierarchies inside your Ember app.
 Install the addon in your app:
 
 ```
-ember install git+ssh://git@github.com:AltSchool/ember-cli-react.git
+ember install ember-cli-react
 ```
 
 Write your first JSX React component:
@@ -21,20 +26,111 @@ export default function(props) {
 }
 ```
 
-Then render your component in a template:
+Then render your component in a handlebars template:
 
 ```handlebars
 {{say-hi name="Alex"}}
 ```
 
-## Next Steps
+## Mini Todo List Example
 
-  * Must set `NODE_ENV=production` in order to properly minify react in production builds. Try to include this in an addon build hook.
-  * Figure out how to test react components in ember-mocha
-  * Build a more complete example of a table-view rendered with react. This example should include access to a service or analytics.
+A more complete example which demonstrates how to handle actions from within
+React components and how to share state. To see it working run `ember server` in
+this repo.
 
-## Open Questions
 
-  * How to get current-user in react-component
-  * How to support analytics inside react components?
-  * Is it ok to include react.js in our apps payload? What's the payload size change in production for vishnu-ui? And is there an Android perf difference for loading react.js without using it?
+#### app/templates/application.hbs
+
+```handlebars
+{{todo-list
+  onToggle=(action onToggle)
+  todos=model
+}}
+
+Completed {{completedTodos.length}} todos
+```
+
+#### app/routes/application.js
+
+```javascript
+export default Ember.Route.extend({
+  model() {
+    return [
+      { id: 1, text: 'Buy groceries', isComplete: false },
+      { id: 2, text: 'Go to the gym', isComplete: false },
+      { id: 3, text: 'Read that book', isComplete: false },
+      { id: 4, text: 'Get glasses fixed', isComplete: false }
+    ];
+  }
+});
+```
+
+#### app/controllers/application.js
+
+```javascript
+export default Ember.Controller.extend({
+  completedTodos: Ember.computed.filterBy('model', 'isComplete'),
+
+  onToggle(todoId) {
+    let todos = this.get('model').map((todo) => {
+      if (todo.id === todoId) {
+        todo.isComplete = !todo.isComplete;
+      }
+
+      return todo;
+    });
+
+    this.set('model', todos);
+  }
+});
+```
+
+#### app/components/todo-list.jsx
+
+```jsx
+import React from 'npm:react';
+import TodoItem from './todo-item';
+
+export default function(props) {
+  return (
+    <ul>
+      {props.todos.map((todo) => {
+        return <TodoItem key={todo.id} todo={todo} onToggle={props.onToggle} />
+      })}
+    </ul>
+  );
+}
+```
+
+#### app/components/todo-item.jsx
+
+```jsx
+import React from 'npm:react';
+import ReactDOM from 'npm:react-dom';
+
+export default class TodoItem extends React.Component {
+  render() {
+    let todo = this.props.todo;
+
+    return (
+      <li>
+        <input
+          type="checkbox"
+          checked={todo.isComplete}
+          onChange={this.props.onToggle.bind(null, todo.id)}
+        />
+        <span>{todo.text}</span>
+      </li>
+    );
+  }
+}
+```
+
+
+
+## What's Missing
+
+There is no React `link-to` equivalent for linking to Ember routes inside of your React code. Instead pass action handlers that call `transitionTo` from an Ember route or component.
+
+In order to create minified production builds of React you must set `NODE_ENV=production`.
+
