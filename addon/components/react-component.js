@@ -1,12 +1,13 @@
 import Ember from 'ember';
 import React from 'npm:react';
 import ReactDOM from 'npm:react-dom';
+import htmlToReact from 'npm:html-to-react';
 
 import getMutableAttributes from 'ember-cli-react/utils/get-mutable-attributes';
 import lookupFactory from 'ember-cli-react/utils/lookup-factory';
 
-
 const { get } = Ember;
+const htmlToReactParser = new htmlToReact.Parser();
 
 const ReactComponent = Ember.Component.extend({
   /**
@@ -37,6 +38,7 @@ const ReactComponent = Ember.Component.extend({
     }
 
     const props = getMutableAttributes(get(this, 'attrs'));
+    props.children = [htmlToReactParser.parse(get(this, 'element.innerHTML'))];
 
     ReactDOM.render(React.createElement(
       componentClass,
