@@ -3,7 +3,7 @@ __This is ALPHA Software__
 This was built as a prototype to evaluate using react inside of our Ember apps. We are not yet using it in production. PRs and constructive questions and comments via [GitHub issues](https://github.com/AltSchool/ember-cli-react/issues/new) are highly encouraged.
 
 # ember-cli-react
-[![Circle CI](https://circleci.com/gh/AltSchool/ember-cli-react.svg?style=shield&circle-token=2195fac1d00d127511c7c197acca80a078a485a1)](https://circleci.com/gh/AltSchool/ember-cli-react)
+[![Circle CI](https://circleci.com/gh/AltSchool/ember-cli-react.svg?style=shield)](https://circleci.com/gh/AltSchool/ember-cli-react)
 
 Use React component hierarchies inside your Ember app.
 
