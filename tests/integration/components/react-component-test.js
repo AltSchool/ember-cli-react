@@ -25,7 +25,7 @@ describeComponent(
       expect(this.$()).to.have.length(1);
     });
 
-    it('throws error when no component found', function() {
+    it.skip('throws error when no component found', function() {
       expect(() => {
         this.render(hbs`{{react-component "missing-component"}}`);
       }).to.throw(/Could not find react component/);
