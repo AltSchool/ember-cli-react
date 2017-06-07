@@ -36,6 +36,26 @@ describeComponent(
       expect(this.$().text()).to.equal("Hello Alex");
     });
 
+    it('supports props.children', function() {
+      this.render(hbs`
+        {{#react-component "the-wrapper"}}
+          {{react-component "say-hi" name="Noctis"}}
+        {{/react-component}}
+      `);
+
+      expect(this.$().text().trim()).to.match(/^Content:\s+Hello Noctis$/);
+    });
+
+    it('supports wrapping Ember components', function() {
+      this.render(hbs`
+        {{#react-component "the-wrapper"}}
+          {{ember-say-hi name="Ignis"}}
+        {{/react-component}}
+      `);
+
+      expect(this.$().text().trim()).to.match(/^Content:\s+Hello Ignis$/);
+    });
+
     it('rerenders on state change', function() {
       this.render(hbs`{{react-component "say-hi" name=name}}`);
       this.set('name', 'Owen');
