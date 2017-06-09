@@ -47,7 +47,7 @@
     "react-dom": "^15.5.4"
   },
   "dependencies": {
-    "broccoli-react": "https://github.com/pswai/broccoli-react.git",
+    "broccoli-react": "^0.8.0",
     "ember-cli-babel": "^6.0.0",
     "rsvp": "^3.2.1"
   },
