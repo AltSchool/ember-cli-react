@@ -32,6 +32,10 @@ Then render your component in a handlebars template:
 {{say-hi name="Alex"}}
 ```
 
+**NOTE**: If you install `ember-cli-react` using npm or yarn install, instead of
+the ember install command, then you will need to manually update the first line
+of `app/resolver.js` to `import Resolver from 'ember-cli-react/resolver';`.
+
 ## Mini Todo List Example
 
 A more complete example which demonstrates how to handle actions from within
