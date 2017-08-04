@@ -1,7 +1,7 @@
 import Ember from 'ember';
 
-const emberMajorMinorVersion = Ember.VERSION.match(/(\d+\.\d+)\.*/)[1];
-const isGlimmer = Number(emberMajorMinorVersion) >= 2.10;
+const [major, minor] = Ember.VERSION.split('.');
+const isGlimmer = major >= 2 && minor >= 10; // >= 2.10
 
 let getMutValue;
 
