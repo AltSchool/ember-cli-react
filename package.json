@@ -43,11 +43,11 @@
     "ember-sinon": "0.5.0",
     "ember-source": "~2.13.0",
     "loader.js": "^4.2.3",
-    "react": "^0.14.7",
-    "react-dom": "^0.14.7"
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4"
   },
   "dependencies": {
-    "broccoli-react": "^0.7.1",
+    "broccoli-react": "^0.8.0",
     "ember-cli-babel": "^6.0.0",
     "rsvp": "^3.2.1"
   },
