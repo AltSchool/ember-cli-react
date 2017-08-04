@@ -15,7 +15,7 @@ if (isGlimmer) {
     }
   };
 } else {
-  getMutValue = Ember.__loader.require('ember-glimmer/hooks/get-value')['default'];
+  getMutValue = Ember.__loader.require('ember-htmlbars/hooks/get-value')['default'];
 }
 
 export default function getMutableAttributes(attrs) {
