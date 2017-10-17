@@ -37,23 +37,81 @@ describeComponent(
     });
 
     it('supports props.children', function() {
+      this.set('name', 'Noctis');
+
       this.render(hbs`
         {{#react-component "the-wrapper"}}
-          {{react-component "say-hi" name="Noctis"}}
+          {{react-component "say-hi" name=name}}
         {{/react-component}}
       `);
 
       expect(this.$().text().trim()).to.match(/^Content:\s+Hello Noctis$/);
     });
 
-    it('supports wrapping Ember components', function() {
+    it('supports props.children and rerender', function() {
+      this.set('name', 'Noctis');
+
       this.render(hbs`
         {{#react-component "the-wrapper"}}
-          {{ember-say-hi name="Ignis"}}
+          {{react-component "say-hi" name=name}}
+        {{/react-component}}
+      `);
+
+      this.set('name', 'Gladiolus');
+
+      expect(this.$().text().trim()).to.match(/^Content:\s+Hello Gladiolus$/);
+    });
+
+    it('supports wrapping Ember components', function() {
+      this.set('name', 'Ignis');
+
+      this.render(hbs`
+        {{#react-component "the-wrapper"}}
+          {{ember-say-hi name=name}}
         {{/react-component}}
       `);
 
       expect(this.$().text().trim()).to.match(/^Content:\s+Hello Ignis$/);
+    });
+
+    it('supports wrapping Ember components and rerender', function() {
+      this.set('name', 'Ignis');
+
+      this.render(hbs`
+        {{#react-component "the-wrapper"}}
+          {{ember-say-hi name=name}}
+        {{/react-component}}
+      `);
+
+      this.set('name', 'Prompto');
+
+      expect(this.$().text().trim()).to.match(/^Content:\s+Hello Prompto$/);
+    });
+
+    it('supports wrapping text node', function() {
+      this.set('value', 'Ancient');
+
+      this.render(hbs`
+        {{#react-component "the-wrapper"}}
+          {{value}}
+        {{/react-component}}
+      `);
+
+      expect(this.$().text().trim()).to.match(/^Content:\s+Ancient$/);
+    });
+
+    it('supports wrapping text node and rerender', function() {
+      this.set('value', 'Ancient');
+
+      this.render(hbs`
+        {{#react-component "the-wrapper"}}
+          {{value}}
+        {{/react-component}}
+      `);
+
+      this.set('value', 'Modern');
+
+      expect(this.$().text().trim()).to.match(/^Content:\s+Modern$/);
     });
 
     it('rerenders on state change', function() {
