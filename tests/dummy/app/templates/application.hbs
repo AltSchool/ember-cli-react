@@ -4,3 +4,8 @@
 }}
 
 Completed {{completedTodos.length}} todos
+
+{{#react-component "the-wrapper"}}
+  <button type='button' {{action 'onClick'}}>Test</button>
+  {{~value~}}
+{{/react-component}}

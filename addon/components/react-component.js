@@ -1,13 +1,12 @@
 import Ember from 'ember';
 import React from 'npm:react';
 import ReactDOM from 'npm:react-dom';
-import htmlToReact from 'npm:html-to-react';
+import EmberWrapper from './ember-wrapper';
 
 import getMutableAttributes from 'ember-cli-react/utils/get-mutable-attributes';
 import lookupFactory from 'ember-cli-react/utils/lookup-factory';
 
 const { get } = Ember;
-const htmlToReactParser = new htmlToReact.Parser();
 
 const ReactComponent = Ember.Component.extend({
   /**
@@ -38,11 +37,27 @@ const ReactComponent = Ember.Component.extend({
     }
 
     const props = getMutableAttributes(get(this, 'attrs'));
-    props.children = [htmlToReactParser.parse(get(this, 'element.innerHTML'))];
+
+    // Determine the children
+    // If there is already `children` in `props`, we just pass it down (it can be function).
+    // Otherwise we need to wrap the current `childNodes` inside a React component.
+    // It is important that `childNodes` are reconstructed with `[...childNodes]` because
+    // it is a `NodeList`-type object instead of Array in the first place.
+    // Without reconstructing, `childNodes` will include the React component itself when
+    // `componentDidMount` hook is triggerred.
+    let children = props.children;
+    if (!children) {
+      const childNodes = get(this, 'element.childNodes');
+      children = [React.createElement(EmberWrapper, {
+        key: get(this, 'elementId'),
+        nodes: [...childNodes]
+      })];
+    }
 
     ReactDOM.render(React.createElement(
       componentClass,
-      props
+      props,
+      children
     ), get(this, 'element'));
   },
 
