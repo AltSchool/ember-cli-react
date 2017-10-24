@@ -1,4 +1,4 @@
-import React from 'npm:react';
+import React from "npm:react";
 
 /**
  * A React component that is used to render HTML Nodes.
@@ -12,20 +12,19 @@ import React from 'npm:react';
  *
  * Integration guide: https://reactjs.org/docs/integrating-with-other-libraries.html
  */
-class EmberWrapper extends React.Component {
+class YieldWrapper extends React.Component {
   componentDidMount() {
     this.$el = window.$(this.el);
     this.$el.append(...this.props.nodes);
   }
 
-  componentWillUnmount() {
-  }
+  componentWillUnmount() {}
 
   render() {
-    return React.createElement('span', {
-      ref: el => this.el = el
+    return React.createElement("span", {
+      ref: el => (this.el = el)
     });
   }
 }
 
-export default EmberWrapper;
+export default YieldWrapper;
