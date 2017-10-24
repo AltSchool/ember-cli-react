@@ -14,8 +14,13 @@ import React from "npm:react";
  */
 class YieldWrapper extends React.Component {
   componentDidMount() {
-    this.$el = window.$(this.el);
-    this.$el.append(...this.props.nodes);
+    // Different with the integration guide, we avoid jQuery here
+    const fragment = document.createDocumentFragment();
+    for (let node of this.props.nodes) {
+      fragment.appendChild(node);
+    }
+
+    this.el.appendChild(fragment);
   }
 
   componentWillUnmount() {}
