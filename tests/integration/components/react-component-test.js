@@ -8,6 +8,7 @@ import {
   describe
 } from 'mocha';
 import Ember from 'ember';
+import React from 'npm:react';
 import hbs from 'htmlbars-inline-precompile';
 import sinon from 'sinon';
 
@@ -125,7 +126,7 @@ describeComponent(
         {{/ember-box}}
       `);
 
-      expect(this.$().text().trim()).to.match(/^!Content:\s+Hello Luna!$/);
+      expect(this.$().text().trim()).to.match(/^!Content: Hello Luna!$/);
     });
 
     it('supports interleaving React and Ember components, and it rerenders when update', function() {
@@ -141,7 +142,17 @@ describeComponent(
 
       this.set('name', 'Iris');
 
-      expect(this.$().text().trim()).to.match(/^!Content:\s+Hello Iris!$/);
+      expect(this.$().text().trim()).to.match(/^!Content: Hello Iris!$/);
+    });
+
+    it('supports Function as Child Component', function () {
+      this.set('renderChildren', text => React.createElement('span', null, `FACC is ${text}!!!`))
+
+      this.render(hbs`
+        {{react-component "facc-wrapper" children=(action renderChildren)}}
+      `);
+
+      expect(this.$().text().trim()).to.match(/^Warning: FACC is supported but anti-pattern!!!$/);
     });
 
     it('rerenders on state change', function() {
