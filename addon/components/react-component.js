@@ -1,10 +1,10 @@
-import Ember from "ember";
-import React from "npm:react";
-import ReactDOM from "npm:react-dom";
-import YieldWrapper from "./react-components/yield-wrapper";
+import Ember from 'ember';
+import React from 'npm:react';
+import ReactDOM from 'npm:react-dom';
+import YieldWrapper from './react-components/yield-wrapper';
 
-import getMutableAttributes from "ember-cli-react/utils/get-mutable-attributes";
-import lookupFactory from "ember-cli-react/utils/lookup-factory";
+import getMutableAttributes from 'ember-cli-react/utils/get-mutable-attributes';
+import lookupFactory from 'ember-cli-react/utils/lookup-factory';
 
 const { get } = Ember;
 
@@ -16,17 +16,17 @@ const ReactComponent = Ember.Component.extend({
     @type React.Component | Function | String
     @default null
    */
-  reactComponent: Ember.computed.reads("_reactComponent"),
+  reactComponent: Ember.computed.reads('_reactComponent'),
 
   didRender: function() {
     this.renderReactComponent();
   },
 
   renderReactComponent() {
-    const componentClassOrName = get(this, "reactComponent");
+    const componentClassOrName = get(this, 'reactComponent');
     let componentClass;
 
-    if (Ember.typeOf(componentClassOrName) === "string") {
+    if (Ember.typeOf(componentClassOrName) === 'string') {
       componentClass = lookupFactory(this, `react-component:${componentClassOrName}`);
     } else {
       componentClass = componentClassOrName;
@@ -36,7 +36,7 @@ const ReactComponent = Ember.Component.extend({
       throw new Error(`Could not find react component : ${componentClassOrName}`);
     }
 
-    const props = getMutableAttributes(get(this, "attrs"));
+    const props = getMutableAttributes(get(this, 'attrs'));
 
     // Determine the children
     // If there is already `children` in `props`, we just pass it down (it can be function).
@@ -47,20 +47,20 @@ const ReactComponent = Ember.Component.extend({
     // `componentDidMount` hook is triggerred.
     let children = props.children;
     if (!children) {
-      const childNodes = get(this, "element.childNodes");
+      const childNodes = get(this, 'element.childNodes');
       children = [
         React.createElement(YieldWrapper, {
-          key: get(this, "elementId"),
+          key: get(this, 'elementId'),
           nodes: [...childNodes]
         })
       ];
     }
 
-    ReactDOM.render(React.createElement(componentClass, props, children), get(this, "element"));
+    ReactDOM.render(React.createElement(componentClass, props, children), get(this, 'element'));
   },
 
   willDestroyElement: function() {
-    ReactDOM.unmountComponentAtNode(get(this, "element"));
+    ReactDOM.unmountComponentAtNode(get(this, 'element'));
   }
 });
 
@@ -68,7 +68,7 @@ ReactComponent.reopenClass({
   // Some versions of Ember override positional param value to undefined when
   // a subclass is created using `Ember.extend({ reactComponent: foo })` so
   // instead store this value in a separate property.
-  positionalParams: ["_reactComponent"]
+  positionalParams: ['_reactComponent']
 });
 
 export default ReactComponent;

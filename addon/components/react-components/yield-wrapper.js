@@ -1,4 +1,4 @@
-import React from "npm:react";
+import React from 'npm:react';
 
 /**
  * A React component that is used to render HTML Nodes.
@@ -20,13 +20,16 @@ class YieldWrapper extends React.Component {
       fragment.appendChild(node);
     }
 
-    this.el.appendChild(fragment);
+    // This replace the original DOM element
+    this.el.parentNode.replaceChild(fragment, this.el);
   }
 
   componentWillUnmount() {}
 
   render() {
-    return React.createElement("span", {
+    // This element is temporary. When this is mounted,
+    // it will be replaced by the children nodes, handled by Ember.
+    return React.createElement('span', {
       ref: el => (this.el = el)
     });
   }
