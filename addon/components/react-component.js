@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import React from 'npm:react';
 import ReactDOM from 'npm:react-dom';
-import YieldWrapper from './react-components/yield-wrapper';
+import YieldWrapper from './react-component/yield-wrapper';
 
 import getMutableAttributes from 'ember-cli-react/utils/get-mutable-attributes';
 import lookupFactory from 'ember-cli-react/utils/lookup-factory';
