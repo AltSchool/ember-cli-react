@@ -144,6 +144,26 @@ describeComponent(
 
       expect(this.$().text().trim()).to.match(/^!Content: Hello Iris!$/);
     });
+    
+    it('supports mutating children structure', function() {
+      this.set('isComing', true);
+
+      this.render(hbs`
+        {{#react-component "the-wrapper" ~}}
+          <div>
+            {{~#if isComing~}}
+              {{~ember-say-hi name="Ignis" ~}}
+            {{~else~}}
+              See ya!
+            {{~/if~}}
+          </div>
+        {{~/react-component}}
+      `);
+
+      this.set('isComing', false);
+
+      expect(this.$().text().trim()).to.match(/^Content: See ya!$/);
+    });
 
     it('supports Function as Child Component', function () {
       this.set('renderChildren', text => React.createElement('span', null, `FACC is ${text}!!!`))
