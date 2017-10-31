@@ -4,7 +4,9 @@ import React from 'npm:react';
  * A React component that is used to render HTML Nodes.
  *
  * The primary usage of this component is to support `props.children` in `react-component`.
- * The catch is that an additional `<span>` is introduced as a wrapper.
+ * The catch is that if the children is unstable, they need to be wrapped in a stable tag
+ * (e.g. div) to make Glimmer happy.
+ * See: https://github.com/yapplabs/ember-wormhole/issues/66#issuecomment-263575168
  *
  * Note that although this is possible, it should be used as a tool to migrate Ember to React
  * without the hard requirement to start with leaf components. It is highly recommended to
