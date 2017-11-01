@@ -36,6 +36,36 @@ Then render your component in a handlebars template:
 the ember install command, then you will need to manually update the first line
 of `app/resolver.js` to `import Resolver from 'ember-cli-react/resolver';`.
 
+## Block Form
+Your React component can be used in block form to allow composition with existing
+Ember or React components.
+
+```handlebars
+{{#react-panel}}
+  {{ember-say-hi name="World!"}}
+{{/react-panel}}
+```
+
+The children of `react-panel` will be populated to `props.children`.
+
+Note that if the children contains mutating structure (e.g. `{{if}}`, `{{each}}`),
+you need to wrap them in a stable tag to work around [this Glimmer issue](https://github.com/yapplabs/ember-wormhole/issues/66#issuecomment-263575168).
+
+```handlebars
+{{#react-panel}}
+  <div>
+    {{#if isComing}}
+      {{ember-say-hi name="World!"}}
+    {{else}}
+      See ya!
+    {{/if}}
+  </div>
+{{/react-panel}}
+```
+
+Although this is possible, block form should be used as a tool to migrate Ember to React
+without the hard requirement to start with leaf components. It is highly recommended to have clean React component tree whenever possible for best performance.
+
 ## Mini Todo List Example
 
 A more complete example which demonstrates how to handle actions from within

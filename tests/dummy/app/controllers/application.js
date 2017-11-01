@@ -13,5 +13,15 @@ export default Ember.Controller.extend({
     });
 
     this.set('model', todos);
+  },
+
+  actions: {
+    resetAll() {
+      const updated = this.get('model').map(todo => {
+        todo.isComplete = false;
+        return todo;
+      });
+      this.set('model', updated);
+    }
   }
 });

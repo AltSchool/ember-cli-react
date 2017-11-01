@@ -8,6 +8,7 @@ import {
   describe
 } from 'mocha';
 import Ember from 'ember';
+import React from 'npm:react';
 import hbs from 'htmlbars-inline-precompile';
 import sinon from 'sinon';
 
@@ -15,7 +16,7 @@ const { run } = Ember;
 
 describeComponent(
   'react-component',
-  'Integration: ReactComponentComponent',
+  'Integration: ReactComponent',
   {
     integration: true
   },
@@ -34,6 +35,144 @@ describeComponent(
     it('passes state', function() {
       this.render(hbs`{{react-component "say-hi" name="Alex"}}`);
       expect(this.$().text()).to.equal("Hello Alex");
+    });
+
+    it('supports props.children', function() {
+      this.set('name', 'Noctis');
+
+      this.render(hbs`
+        {{#react-component "the-wrapper"}}
+          {{~react-component "say-hi" name=name ~}}
+        {{/react-component}}
+      `);
+
+      expect(this.$().text().trim()).to.match(/^Content: Hello Noctis$/);
+    });
+
+    it('supports props.children and rerender', function() {
+      this.set('name', 'Noctis');
+
+      this.render(hbs`
+        {{#react-component "the-wrapper"}}
+          {{~react-component "say-hi" name=name ~}}
+        {{/react-component}}
+      `);
+
+      this.set('name', 'Gladiolus');
+
+      expect(this.$().text().trim()).to.match(/^Content: Hello Gladiolus$/);
+    });
+
+    it('supports wrapping Ember components', function() {
+      this.set('name', 'Ignis');
+
+      this.render(hbs`
+        {{#react-component "the-wrapper"}}
+          {{~ember-say-hi name=name ~}}
+        {{/react-component}}
+      `);
+
+      expect(this.$().text().trim()).to.match(/^Content: Hello Ignis$/);
+    });
+
+    it('supports wrapping Ember components and rerender', function() {
+      this.set('name', 'Ignis');
+
+      this.render(hbs`
+        {{#react-component "the-wrapper"}}
+          {{~ember-say-hi name=name ~}}
+        {{/react-component}}
+      `);
+
+      this.set('name', 'Prompto');
+
+      expect(this.$().text().trim()).to.match(/^Content: Hello Prompto$/);
+    });
+
+    it('supports wrapping text node', function() {
+      this.set('value', 'Ancient');
+
+      this.render(hbs`
+        {{#react-component "the-wrapper"}}
+          {{~value~}}
+        {{/react-component}}
+      `);
+
+      expect(this.$().text().trim()).to.match(/^Content: Ancient$/);
+    });
+
+    it('supports wrapping text node and rerender', function() {
+      this.set('value', 'Ancient');
+
+      this.render(hbs`
+        {{#react-component "the-wrapper"}}
+          {{~value~}}
+        {{/react-component}}
+      `);
+
+      this.set('value', 'Modern');
+
+      expect(this.$().text().trim()).to.match(/^Content: Modern$/);
+    });
+
+    it('supports interleaving React and Ember components', function() {
+      this.set('name', 'Luna');
+
+      this.render(hbs`
+        {{#ember-box}}
+          {{#react-component "the-wrapper"}}
+            {{~ember-say-hi name=name ~}}
+          {{/react-component}}
+        {{/ember-box}}
+      `);
+
+      expect(this.$().text().trim()).to.match(/^!Content: Hello Luna!$/);
+    });
+
+    it('supports interleaving React and Ember components, and it rerenders when update', function() {
+      this.set('name', 'Luna');
+
+      this.render(hbs`
+        {{#ember-box}}
+          {{#react-component "the-wrapper"}}
+            {{~ember-say-hi name=name ~}}
+          {{/react-component}}
+        {{/ember-box}}
+      `);
+
+      this.set('name', 'Iris');
+
+      expect(this.$().text().trim()).to.match(/^!Content: Hello Iris!$/);
+    });
+    
+    it('supports mutating children structure', function() {
+      this.set('isComing', true);
+
+      this.render(hbs`
+        {{#react-component "the-wrapper" ~}}
+          <div>
+            {{~#if isComing~}}
+              {{~ember-say-hi name="Ignis" ~}}
+            {{~else~}}
+              See ya!
+            {{~/if~}}
+          </div>
+        {{~/react-component}}
+      `);
+
+      this.set('isComing', false);
+
+      expect(this.$().text().trim()).to.match(/^Content: See ya!$/);
+    });
+
+    it('supports Function as Child Component', function () {
+      this.set('renderChildren', text => React.createElement('span', null, `FACC is ${text}!!!`))
+
+      this.render(hbs`
+        {{react-component "facc-wrapper" children=(action renderChildren)}}
+      `);
+
+      expect(this.$().text().trim()).to.match(/^Warning: FACC is supported but anti-pattern!!!$/);
     });
 
     it('rerenders on state change', function() {

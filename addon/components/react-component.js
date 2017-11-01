@@ -1,10 +1,10 @@
 import Ember from 'ember';
 import React from 'npm:react';
 import ReactDOM from 'npm:react-dom';
+import YieldWrapper from './react-component/yield-wrapper';
 
 import getMutableAttributes from 'ember-cli-react/utils/get-mutable-attributes';
 import lookupFactory from 'ember-cli-react/utils/lookup-factory';
-
 
 const { get } = Ember;
 
@@ -38,10 +38,25 @@ const ReactComponent = Ember.Component.extend({
 
     const props = getMutableAttributes(get(this, 'attrs'));
 
-    ReactDOM.render(React.createElement(
-      componentClass,
-      props
-    ), get(this, 'element'));
+    // Determine the children
+    // If there is already `children` in `props`, we just pass it down (it can be function).
+    // Otherwise we need to wrap the current `childNodes` inside a React component.
+    // It is important that `childNodes` are reconstructed with `[...childNodes]` because
+    // it is a `NodeList`-type object instead of Array in the first place.
+    // Without reconstructing, `childNodes` will include the React component itself when
+    // `componentDidMount` hook is triggerred.
+    let children = props.children;
+    if (!children) {
+      const childNodes = get(this, 'element.childNodes');
+      children = [
+        React.createElement(YieldWrapper, {
+          key: get(this, 'elementId'),
+          nodes: [...childNodes]
+        })
+      ];
+    }
+
+    ReactDOM.render(React.createElement(componentClass, props, children), get(this, 'element'));
   },
 
   willDestroyElement: function() {
@@ -57,4 +72,3 @@ ReactComponent.reopenClass({
 });
 
 export default ReactComponent;
-
