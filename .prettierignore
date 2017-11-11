@@ -1,0 +1,8 @@
+.git/
+.vscode/
+.idea/
+dist/
+node_modules/
+bower_components/
+tmp/
+vendor/

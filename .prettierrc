@@ -1,0 +1,13 @@
+{
+  "printWidth": 80,
+  "singleQuote": false,
+  "trailingComma": "none",
+  "overrides": [
+    {
+      "files": [".prettierrc", ".watchmanconfig"],
+      "options": {
+        "parser": "json"
+      }
+    }
+  ]
+}
