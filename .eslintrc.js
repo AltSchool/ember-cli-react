@@ -6,18 +6,14 @@ module.exports = {
     },
     sourceType: 'module'
   },
-  extends: [
-    'eslint:recommended',
-    'prettier'
-  ],
-  plugins: [
-    'prettier'
-  ],
+  extends: ['eslint:recommended', 'prettier'],
+  plugins: ['prettier'],
   env: {
     es6: true,
-    node: true
+    node: true,
+    browser: true
   },
   rules: {
-    'prettier/prettier': 'error'
+    'prettier/prettier': 'warn'
   }
 };
