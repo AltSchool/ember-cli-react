@@ -1,6 +1,6 @@
 {
   "printWidth": 80,
-  "singleQuote": false,
+  "singleQuote": true,
   "trailingComma": "none",
   "overrides": [
     {
