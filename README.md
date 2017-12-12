@@ -5,6 +5,7 @@ This was built as a prototype to evaluate using react inside of our Ember apps. 
 # ember-cli-react
 
 [![Circle CI](https://circleci.com/gh/AltSchool/ember-cli-react.svg?style=shield)](https://circleci.com/gh/AltSchool/ember-cli-react)
+[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 
 Use React component hierarchies inside your Ember app.
 
