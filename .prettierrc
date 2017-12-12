@@ -1,7 +1,7 @@
 {
   "printWidth": 80,
   "singleQuote": true,
-  "trailingComma": "none",
+  "trailingComma": "es5",
   "overrides": [
     {
       "files": [".prettierrc", ".watchmanconfig"],
