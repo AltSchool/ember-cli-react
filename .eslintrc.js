@@ -2,18 +2,22 @@ module.exports = {
   root: true,
   parserOptions: {
     ecmaFeatures: {
-      jsx: true
+      jsx: true,
     },
-    sourceType: 'module'
+    sourceType: 'module',
   },
   extends: ['eslint:recommended', 'prettier'],
-  plugins: ['prettier'],
+  plugins: ['react', 'prettier'],
   env: {
     es6: true,
     node: true,
-    browser: true
+    browser: true,
   },
   rules: {
-    'prettier/prettier': 'warn'
-  }
+    'prettier/prettier': 'warn',
+
+    'react/jsx-uses-react': 'error',
+
+    'react/jsx-uses-vars': 'error',
+  },
 };

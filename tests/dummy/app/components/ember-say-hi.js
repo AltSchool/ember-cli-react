@@ -3,5 +3,5 @@ import Ember from 'ember';
 export default Ember.Component.extend({
   tagName: 'span',
 
-  name: 'unknown'
+  name: 'unknown',
 });

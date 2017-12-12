@@ -3,9 +3,7 @@ import Resolver from 'ember-resolver';
 
 import ReactComponent from 'ember-cli-react/components/react-component';
 
-
 const { get } = Ember;
-
 
 export default Resolver.extend({
   resolveComponent(parsedName) {
@@ -19,7 +17,7 @@ export default Resolver.extend({
       return result;
     } else {
       return ReactComponent.extend({
-        reactComponent: result
+        reactComponent: result,
       });
     }
   },
@@ -29,5 +27,5 @@ export default Resolver.extend({
     const result = this.resolveOther(parsedName);
     parsedName.type = 'react-component';
     return result;
-  }
+  },
 });
