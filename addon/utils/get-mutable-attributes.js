@@ -1,7 +1,7 @@
 import Ember from 'ember';
 
 const [major, minor] = Ember.VERSION.split('.');
-const isGlimmer = major >= 2 && minor >= 10; // >= 2.10
+const isGlimmer = major > 2 || (major == 2 && minor >= 10); // >= 2.10
 
 let getMutValue;
 
