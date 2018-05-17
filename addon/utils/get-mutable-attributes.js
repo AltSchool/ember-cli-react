@@ -7,7 +7,7 @@ let getMutValue;
 
 if (isGlimmer) {
   const { MUTABLE_CELL } = Ember.__loader.require('ember-views/compat/attrs');
-  getMutValue = (value) => {
+  getMutValue = value => {
     if (value && value[MUTABLE_CELL]) {
       return value.value;
     } else {
@@ -15,7 +15,9 @@ if (isGlimmer) {
     }
   };
 } else {
-  getMutValue = Ember.__loader.require('ember-htmlbars/hooks/get-value')['default'];
+  getMutValue = Ember.__loader.require('ember-htmlbars/hooks/get-value')[
+    'default'
+  ];
 }
 
 export default function getMutableAttributes(attrs) {

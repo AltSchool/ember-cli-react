@@ -27,13 +27,18 @@ const ReactComponent = Ember.Component.extend({
     let componentClass;
 
     if (Ember.typeOf(componentClassOrName) === 'string') {
-      componentClass = lookupFactory(this, `react-component:${componentClassOrName}`);
+      componentClass = lookupFactory(
+        this,
+        `react-component:${componentClassOrName}`
+      );
     } else {
       componentClass = componentClassOrName;
     }
 
     if (!componentClass) {
-      throw new Error(`Could not find react component : ${componentClassOrName}`);
+      throw new Error(
+        `Could not find react component : ${componentClassOrName}`
+      );
     }
 
     const props = getMutableAttributes(get(this, 'attrs'));
@@ -51,24 +56,27 @@ const ReactComponent = Ember.Component.extend({
       children = [
         React.createElement(YieldWrapper, {
           key: get(this, 'elementId'),
-          nodes: [...childNodes]
-        })
+          nodes: [...childNodes],
+        }),
       ];
     }
 
-    ReactDOM.render(React.createElement(componentClass, props, children), get(this, 'element'));
+    ReactDOM.render(
+      React.createElement(componentClass, props, children),
+      get(this, 'element')
+    );
   },
 
   willDestroyElement: function() {
     ReactDOM.unmountComponentAtNode(get(this, 'element'));
-  }
+  },
 });
 
 ReactComponent.reopenClass({
   // Some versions of Ember override positional param value to undefined when
   // a subclass is created using `Ember.extend({ reactComponent: foo })` so
   // instead store this value in a separate property.
-  positionalParams: ['_reactComponent']
+  positionalParams: ['_reactComponent'],
 });
 
 export default ReactComponent;

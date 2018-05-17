@@ -1,9 +1,11 @@
-__This is ALPHA Software__
+**This is ALPHA Software**
 
 This was built as a prototype to evaluate using react inside of our Ember apps. We are not yet using it in production. PRs and constructive questions and comments via [GitHub issues](https://github.com/AltSchool/ember-cli-react/issues/new) are highly encouraged.
 
 # ember-cli-react
+
 [![Circle CI](https://circleci.com/gh/AltSchool/ember-cli-react.svg?style=shield)](https://circleci.com/gh/AltSchool/ember-cli-react)
+[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 
 Use React component hierarchies inside your Ember app.
 
@@ -22,7 +24,7 @@ Write your first JSX React component:
 import React from 'npm:react';
 
 export default function(props) {
-  return <span>Hello {props.name}</span>
+  return <span>Hello {props.name}</span>;
 }
 ```
 
@@ -37,6 +39,7 @@ the ember install command, then you will need to manually update the first line
 of `app/resolver.js` to `import Resolver from 'ember-cli-react/resolver';`.
 
 ## Block Form
+
 Your React component can be used in block form to allow composition with existing
 Ember or React components.
 
@@ -72,7 +75,6 @@ A more complete example which demonstrates how to handle actions from within
 React components and how to share state. To see it working run `ember server` in
 this repo.
 
-
 #### app/templates/application.hbs
 
 ```handlebars
@@ -93,9 +95,9 @@ export default Ember.Route.extend({
       { id: 1, text: 'Buy groceries', isComplete: false },
       { id: 2, text: 'Go to the gym', isComplete: false },
       { id: 3, text: 'Read that book', isComplete: false },
-      { id: 4, text: 'Get glasses fixed', isComplete: false }
+      { id: 4, text: 'Get glasses fixed', isComplete: false },
     ];
-  }
+  },
 });
 ```
 
@@ -106,7 +108,7 @@ export default Ember.Controller.extend({
   completedTodos: Ember.computed.filterBy('model', 'isComplete'),
 
   onToggle(todoId) {
-    let todos = this.get('model').map((todo) => {
+    let todos = this.get('model').map(todo => {
       if (todo.id === todoId) {
         todo.isComplete = !todo.isComplete;
       }
@@ -115,7 +117,7 @@ export default Ember.Controller.extend({
     });
 
     this.set('model', todos);
-  }
+  },
 });
 ```
 
@@ -128,8 +130,8 @@ import TodoItem from './todo-item';
 export default function(props) {
   return (
     <ul>
-      {props.todos.map((todo) => {
-        return <TodoItem key={todo.id} todo={todo} onToggle={props.onToggle} />
+      {props.todos.map(todo => {
+        return <TodoItem key={todo.id} todo={todo} onToggle={props.onToggle} />;
       })}
     </ul>
   );
@@ -160,11 +162,8 @@ export default class TodoItem extends React.Component {
 }
 ```
 
-
-
 ## What's Missing
 
 There is no React `link-to` equivalent for linking to Ember routes inside of your React code. Instead pass action handlers that call `transitionTo` from an Ember route or component.
 
 In order to create minified production builds of React you must set `NODE_ENV=production`.
-

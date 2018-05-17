@@ -1,12 +1,7 @@
 /* jshint expr:true */
 import { expect } from 'chai';
-import {
-  describeComponent,
-  it
-} from 'ember-mocha';
-import {
-  describe
-} from 'mocha';
+import { describeComponent, it } from 'ember-mocha';
+import { describe } from 'mocha';
 import Ember from 'ember';
 import React from 'npm:react';
 import hbs from 'htmlbars-inline-precompile';
@@ -18,7 +13,7 @@ describeComponent(
   'react-component',
   'Integration: ReactComponent',
   {
-    integration: true
+    integration: true,
   },
   function() {
     it('renders', function() {
@@ -34,7 +29,7 @@ describeComponent(
 
     it('passes state', function() {
       this.render(hbs`{{react-component "say-hi" name="Alex"}}`);
-      expect(this.$().text()).to.equal("Hello Alex");
+      expect(this.$().text()).to.equal('Hello Alex');
     });
 
     it('supports props.children', function() {
@@ -46,7 +41,11 @@ describeComponent(
         {{/react-component}}
       `);
 
-      expect(this.$().text().trim()).to.match(/^Content: Hello Noctis$/);
+      expect(
+        this.$()
+          .text()
+          .trim()
+      ).to.match(/^Content: Hello Noctis$/);
     });
 
     it('supports props.children and rerender', function() {
@@ -60,7 +59,11 @@ describeComponent(
 
       this.set('name', 'Gladiolus');
 
-      expect(this.$().text().trim()).to.match(/^Content: Hello Gladiolus$/);
+      expect(
+        this.$()
+          .text()
+          .trim()
+      ).to.match(/^Content: Hello Gladiolus$/);
     });
 
     it('supports wrapping Ember components', function() {
@@ -72,7 +75,11 @@ describeComponent(
         {{/react-component}}
       `);
 
-      expect(this.$().text().trim()).to.match(/^Content: Hello Ignis$/);
+      expect(
+        this.$()
+          .text()
+          .trim()
+      ).to.match(/^Content: Hello Ignis$/);
     });
 
     it('supports wrapping Ember components and rerender', function() {
@@ -86,7 +93,11 @@ describeComponent(
 
       this.set('name', 'Prompto');
 
-      expect(this.$().text().trim()).to.match(/^Content: Hello Prompto$/);
+      expect(
+        this.$()
+          .text()
+          .trim()
+      ).to.match(/^Content: Hello Prompto$/);
     });
 
     it('supports wrapping text node', function() {
@@ -98,7 +109,11 @@ describeComponent(
         {{/react-component}}
       `);
 
-      expect(this.$().text().trim()).to.match(/^Content: Ancient$/);
+      expect(
+        this.$()
+          .text()
+          .trim()
+      ).to.match(/^Content: Ancient$/);
     });
 
     it('supports wrapping text node and rerender', function() {
@@ -112,7 +127,11 @@ describeComponent(
 
       this.set('value', 'Modern');
 
-      expect(this.$().text().trim()).to.match(/^Content: Modern$/);
+      expect(
+        this.$()
+          .text()
+          .trim()
+      ).to.match(/^Content: Modern$/);
     });
 
     it('supports interleaving React and Ember components', function() {
@@ -126,7 +145,11 @@ describeComponent(
         {{/ember-box}}
       `);
 
-      expect(this.$().text().trim()).to.match(/^!Content: Hello Luna!$/);
+      expect(
+        this.$()
+          .text()
+          .trim()
+      ).to.match(/^!Content: Hello Luna!$/);
     });
 
     it('supports interleaving React and Ember components, and it rerenders when update', function() {
@@ -142,9 +165,13 @@ describeComponent(
 
       this.set('name', 'Iris');
 
-      expect(this.$().text().trim()).to.match(/^!Content: Hello Iris!$/);
+      expect(
+        this.$()
+          .text()
+          .trim()
+      ).to.match(/^!Content: Hello Iris!$/);
     });
-    
+
     it('supports mutating children structure', function() {
       this.set('isComing', true);
 
@@ -162,17 +189,27 @@ describeComponent(
 
       this.set('isComing', false);
 
-      expect(this.$().text().trim()).to.match(/^Content: See ya!$/);
+      expect(
+        this.$()
+          .text()
+          .trim()
+      ).to.match(/^Content: See ya!$/);
     });
 
-    it('supports Function as Child Component', function () {
-      this.set('renderChildren', text => React.createElement('span', null, `FACC is ${text}!!!`))
+    it('supports Function as Child Component', function() {
+      this.set('renderChildren', text =>
+        React.createElement('span', null, `FACC is ${text}!!!`)
+      );
 
       this.render(hbs`
         {{react-component "facc-wrapper" children=(action renderChildren)}}
       `);
 
-      expect(this.$().text().trim()).to.match(/^Warning: FACC is supported but anti-pattern!!!$/);
+      expect(
+        this.$()
+          .text()
+          .trim()
+      ).to.match(/^Warning: FACC is supported but anti-pattern!!!$/);
     });
 
     it('rerenders on state change', function() {
@@ -188,9 +225,11 @@ describeComponent(
         {{react-component "say-hi" name=name}}
       `);
 
-      this.$('input').val('Noah').trigger('change');
+      this.$('input')
+        .val('Noah')
+        .trigger('change');
       run.next(() => {
-        expect(this.$().text()).to.contain("Hello Noah");
+        expect(this.$().text()).to.contain('Hello Noah');
         done();
       });
     });
