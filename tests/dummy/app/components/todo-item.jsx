@@ -1,6 +1,4 @@
 import React from 'npm:react';
-import ReactDOM from 'npm:react-dom';
-
 
 export default class TodoItem extends React.Component {
   render() {

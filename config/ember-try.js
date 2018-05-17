@@ -1,4 +1,4 @@
 /*jshint node:true*/
 module.exports = {
-  useVersionCompatibility: true
+  useVersionCompatibility: true,
 };

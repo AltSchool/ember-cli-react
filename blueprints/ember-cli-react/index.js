@@ -18,9 +18,15 @@ module.exports = {
   // Install react into host app
   afterInstall: function() {
     return RSVP.all([
-      this.addPackageToProject("ember-browserify", getDependencyVersion(pkg, "ember-browserify")),
-      this.addPackageToProject("react", getDependencyVersion(pkg, "react")),
-      this.addPackageToProject("react-dom", getDependencyVersion(pkg, "react-dom"))
+      this.addPackageToProject(
+        'ember-browserify',
+        getDependencyVersion(pkg, 'ember-browserify')
+      ),
+      this.addPackageToProject('react', getDependencyVersion(pkg, 'react')),
+      this.addPackageToProject(
+        'react-dom',
+        getDependencyVersion(pkg, 'react-dom')
+      ),
     ]);
-  }
+  },
 };
