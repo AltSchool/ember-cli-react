@@ -1,7 +1,7 @@
 import React from 'npm:react';
 import TodoItem from './todo-item';
 
-export default function(props) {
+export default function TodoList(props) {
   return (
     <ul>
       {props.todos.map(todo => {

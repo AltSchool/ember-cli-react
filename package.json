@@ -2,7 +2,9 @@
   "name": "ember-cli-react",
   "version": "0.3.1",
   "description": "Use React component hierarchies in your Ember app.",
-  "keywords": ["ember-addon"],
+  "keywords": [
+    "ember-addon"
+  ],
   "directories": {
     "doc": "doc",
     "test": "tests"
@@ -14,7 +16,11 @@
     "precommit": "lint-staged"
   },
   "lint-staged": {
-    "*.{js,jsx}": ["prettier --write", "eslint --fix", "git add"],
+    "*.{js,jsx}": [
+      "prettier --write",
+      "eslint --fix",
+      "git add"
+    ],
     "+(*.{json,css}|.prettierrc|.watchmanconfig)": [
       "prettier --write",
       "git add"
@@ -50,7 +56,7 @@
     "ember-source": "~2.13.0",
     "eslint": "^4.11.0",
     "eslint-config-prettier": "^2.7.0",
-    "eslint-plugin-prettier": "^2.3.1",
+    "eslint-plugin-prettier": "2.6.0",
     "eslint-plugin-react": "^7.5.1",
     "husky": "^0.14.3",
     "lint-staged": "^5.0.0",

@@ -31,6 +31,9 @@ const ReactComponent = Ember.Component.extend({
         this,
         `react-component:${componentClassOrName}`
       );
+
+      // Set `displayName` so that it is visible in React devtools
+      componentClass.displayName = Ember.String.classify(componentClassOrName);
     } else {
       componentClass = componentClassOrName;
     }
