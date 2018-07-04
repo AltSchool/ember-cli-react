@@ -53,12 +53,16 @@ const ReactComponent = Ember.Component.extend({
     let children = props.children;
     if (!children) {
       const childNodes = get(this, 'element.childNodes');
-      children = [
-        React.createElement(YieldWrapper, {
-          key: get(this, 'elementId'),
-          nodes: [...childNodes],
-        }),
-      ];
+
+      // We do not need to do anything if there is no child nodes
+      if (childNodes.length > 0) {
+        children = [
+          React.createElement(YieldWrapper, {
+            key: get(this, 'elementId'),
+            nodes: [...childNodes],
+          }),
+        ];
+      }
     }
 
     ReactDOM.render(
