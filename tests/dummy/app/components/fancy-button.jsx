@@ -1,9 +1,11 @@
 import React from 'npm:react';
 
-export default function(props) {
+const FancyButton = props => {
   return (
     <button className="FancyButton" onClick={props.onClick}>
       Click
     </button>
   );
-}
+};
+
+export default FancyButton;
