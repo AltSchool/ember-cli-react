@@ -1,7 +1,7 @@
-/* jshint node: true */
+/* eslint-env node */
 'use strict';
 
-var react = require('broccoli-react');
+const react = require('broccoli-react');
 
 module.exports = {
   name: 'ember-cli-react',
