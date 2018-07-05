@@ -1,5 +1,7 @@
 import React from 'npm:react';
 
-export default function(props) {
+const TheWrapper = props => {
   return <span>Content: {props.children}</span>;
-}
+};
+
+export default TheWrapper;

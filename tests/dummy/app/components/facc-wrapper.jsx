@@ -1,5 +1,7 @@
 import React from 'npm:react';
 
-export default function(props) {
+const FaccWrapper = props => {
   return <span>Warning: {props.children('supported but anti-pattern')}</span>;
-}
+};
+
+export default FaccWrapper;

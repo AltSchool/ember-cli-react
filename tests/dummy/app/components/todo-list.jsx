@@ -1,7 +1,7 @@
 import React from 'npm:react';
 import TodoItem from './todo-item';
 
-export default function(props) {
+const TodoList = props => {
   return (
     <ul>
       {props.todos.map(todo => {
@@ -9,4 +9,6 @@ export default function(props) {
       })}
     </ul>
   );
-}
+};
+
+export default TodoList;

@@ -1,5 +1,7 @@
 import React from 'npm:react';
 
-export default function(props) {
+const SayHi = props => {
   return <span className="SayHi">Hello {props.name}</span>;
-}
+};
+
+export default SayHi;
