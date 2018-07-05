@@ -1,4 +1,4 @@
-import React from 'npm:react';
+import React from 'react';
 
 /**
  * A React component that is used to render HTML Nodes.

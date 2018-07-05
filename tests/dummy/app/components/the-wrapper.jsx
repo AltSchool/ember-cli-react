@@ -1,4 +1,4 @@
-import React from 'npm:react';
+import React from 'react';
 
 const TheWrapper = props => {
   return <span>Content: {props.children}</span>;

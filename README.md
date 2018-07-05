@@ -21,7 +21,7 @@ Write your first JSX React component:
 
 ```javascript
 // app/components/say-hi.jsx
-import React from 'npm:react';
+import React from 'react';
 
 export default function(props) {
   return <span>Hello {props.name}</span>;
@@ -124,7 +124,7 @@ export default Ember.Controller.extend({
 #### app/components/todo-list.jsx
 
 ```jsx
-import React from 'npm:react';
+import React from 'react';
 import TodoItem from './todo-item';
 
 export default function(props) {
@@ -141,8 +141,8 @@ export default function(props) {
 #### app/components/todo-item.jsx
 
 ```jsx
-import React from 'npm:react';
-import ReactDOM from 'npm:react-dom';
+import React from 'react';
+import ReactDOM from 'react-dom';
 
 export default class TodoItem extends React.Component {
   render() {

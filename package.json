@@ -35,7 +35,7 @@
   "devDependencies": {
     "broccoli-asset-rev": "^2.4.5",
     "ember-ajax": "^3.0.0",
-    "ember-browserify": "^1.1.7",
+    "ember-auto-import": "^1.0.1",
     "ember-cli": "~2.15.1",
     "ember-cli-chai": "^0.4.1",
     "ember-cli-dependency-checker": "^2.0.0",

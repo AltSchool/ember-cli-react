@@ -1,4 +1,4 @@
-import React from 'npm:react';
+import React from 'react';
 import TodoItem from './todo-item';
 
 const TodoList = props => {

@@ -2,7 +2,7 @@ import { expect } from 'chai';
 import { describeComponent, it } from 'ember-mocha';
 import { describe } from 'mocha';
 import Ember from 'ember';
-import React from 'npm:react';
+import React from 'react';
 import hbs from 'htmlbars-inline-precompile';
 import sinon from 'sinon';
 
