@@ -65,10 +65,12 @@
     "react-dom": "^15.5.4"
   },
   "dependencies": {
-    "bower": "^1.8.2",
     "broccoli-react": "^0.8.0",
-    "ember-cli-babel": "^6.3.0",
-    "rsvp": "^3.2.1"
+    "ember-cli-babel": "^6.3.0"
+  },
+  "peerDependencies": {
+    "react": "^15.5.4 || ^16.0.0",
+    "react-dom": "^15.5.4 || ^16.0.0"
   },
   "ember-addon": {
     "configPath": "tests/dummy/config"
