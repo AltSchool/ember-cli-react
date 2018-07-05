@@ -1,4 +1,3 @@
-/* jshint expr:true */
 import { expect } from 'chai';
 import { describeComponent, it } from 'ember-mocha';
 import { describe } from 'mocha';
@@ -210,6 +209,17 @@ describeComponent(
           .text()
           .trim()
       ).to.match(/^Warning: FACC is supported but anti-pattern!!!$/);
+    });
+
+    it('does not create YieldWrapper when there is no child', function() {
+      this.render(hbs`{{no-yield-wrapper}}`);
+
+      // If YieldWrapper is created, it will not render correctly.
+      expect(
+        this.$()
+          .text()
+          .trim()
+      ).to.match(/^Rendered correctly$/);
     });
 
     it('rerenders on state change', function() {
