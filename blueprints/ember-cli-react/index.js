@@ -9,6 +9,12 @@ function getDependencyVersion(packageJson, name) {
   return dependencies[name] || devDependencies[name];
 }
 
+function getPeerDependencyVersion(packageJson, name) {
+  var peerDependencies = packageJson.peerDependencies;
+
+  return peerDependencies[name];
+}
+
 module.exports = {
   description: 'Install ember-cli-react dependencies into your app.',
 
@@ -16,9 +22,20 @@ module.exports = {
 
   // Install react into host app
   afterInstall: function() {
-    return this.addPackageToProject(
-      'ember-auto-import',
-      getDependencyVersion(pkg, 'ember-auto-import')
-    );
+    const packages = [
+      {
+        name: 'ember-auto-import',
+        target: getDependencyVersion(pkg, 'ember-auto-import'),
+      },
+      {
+        name: 'react',
+        target: getPeerDependencyVersion(pkg, 'react'),
+      },
+      {
+        name: 'react-dom',
+        target: getPeerDependencyVersion(pkg, 'react-dom'),
+      },
+    ];
+    return this.addPackagesToProject(packages);
   },
 };
