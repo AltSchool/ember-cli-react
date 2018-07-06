@@ -253,6 +253,9 @@ describeComponent(
           .trim()
       ).to.match(/^Rendered correctly with "show me!"$/);
 
+      // This test is needed because on a re-render, there is already a
+      // non-comment child node (span) created by React. So simply checking
+      // single comment node won't work.
       this.set('text', 'rerender me!');
       expect(
         this.$()
