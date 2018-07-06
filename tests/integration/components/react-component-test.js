@@ -222,6 +222,26 @@ describeComponent(
       ).to.match(/^Rendered correctly$/);
     });
 
+    it('does not create YieldWrapper when there is no child, but the component has children inside', function() {
+      this.render(hbs`{{no-yield-wrapper-with-own-children}}`);
+
+      // If YieldWrapper is created, it will not render correctly.
+      const anchors = this.$('a');
+      expect(anchors.length).to.equals(2);
+      expect(
+        anchors
+          .eq(0)
+          .text()
+          .trim()
+      ).to.equals('Link 1');
+      expect(
+        anchors
+          .eq(1)
+          .text()
+          .trim()
+      ).to.equals('Link 2');
+    });
+
     it('does not create YieldWrapper when there is no child, even after rerendering', function() {
       this.set('text', 'show me!');
       this.render(hbs`{{no-yield-wrapper-with-props text=text}}`);
