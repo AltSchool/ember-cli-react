@@ -1,4 +1,4 @@
-import React from 'npm:react';
+import React from 'react';
 
 const NoYieldWrapperWithProps = props => {
   const { text, children } = props;

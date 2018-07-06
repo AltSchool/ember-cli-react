@@ -1,4 +1,4 @@
-import React from 'npm:react';
+import React from 'react';
 
 const NoYieldWrapperWithOwnChildren = props => {
   if (React.Children.count(props.children)) {
