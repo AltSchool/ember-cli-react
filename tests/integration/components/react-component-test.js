@@ -222,6 +222,25 @@ describeComponent(
       ).to.match(/^Rendered correctly$/);
     });
 
+    it('does not create YieldWrapper when there is no child, even after rerendering', function() {
+      this.set('text', 'show me!');
+      this.render(hbs`{{no-yield-wrapper-with-props text=text}}`);
+
+      // If YieldWrapper is created, it will not render correctly.
+      expect(
+        this.$()
+          .text()
+          .trim()
+      ).to.match(/^Rendered correctly with "show me!"$/);
+
+      this.set('text', 'rerender me!');
+      expect(
+        this.$()
+          .text()
+          .trim()
+      ).to.match(/^Rendered correctly with "rerender me!"$/);
+    });
+
     it('rerenders on state change', function() {
       this.render(hbs`{{react-component "say-hi" name=name}}`);
       this.set('name', 'Owen');
