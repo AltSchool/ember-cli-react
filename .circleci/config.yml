@@ -46,6 +46,24 @@ jobs:
           paths:
             - .
 
+  test_1_13:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name: Run Tests
+          command: ./node_modules/.bin/ember try:one ember-1.13 --skip-cleanup=true
+
+  test_lts_2_4:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name: Run Tests
+          command: ./node_modules/.bin/ember try:one ember-lts-2.4 --skip-cleanup=true
+
   test_lts_2_8:
     <<: *defaults
     steps:
@@ -54,6 +72,15 @@ jobs:
       - run:
           name: Run Tests
           command: ./node_modules/.bin/ember try:one ember-lts-2.8 --skip-cleanup=true
+
+  test_2_10:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name: Run Tests
+          command: ./node_modules/.bin/ember try:one ember-2.10 --skip-cleanup=true
 
   test_lts_2_12:
     <<: *defaults
@@ -64,6 +91,51 @@ jobs:
           name: Run Tests
           command: ./node_modules/.bin/ember try:one ember-lts-2.12 --skip-cleanup=true
 
+  test_lts_2_16:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name: Run Tests
+          command: ./node_modules/.bin/ember try:one ember-lts-2.16 --skip-cleanup=true
+
+  test_lts_2_18:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name: Run Tests
+          command: ./node_modules/.bin/ember try:one ember-lts-2.18 --skip-cleanup=true
+
+  test_lts_3_0:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name: Run Tests
+          command: ./node_modules/.bin/ember try:one ember-lts-3.0 --skip-cleanup=true
+
+  test_lts_3_1:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name: Run Tests
+          command: ./node_modules/.bin/ember try:one ember-lts-3.1 --skip-cleanup=true
+
+  test_lts_3_2:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name: Run Tests
+          command: ./node_modules/.bin/ember try:one ember-lts-3.2 --skip-cleanup=true
+
 workflows:
   version: 2
   test:
@@ -72,9 +144,33 @@ workflows:
       - install_dependencies:
           requires:
             - checkout_code
+      - test_1_13:
+        requires:
+          - install_dependencies
+      - test_lts_2_4:
+        requires:
+          - install_dependencies
       - test_lts_2_8:
-          requires:
-            - install_dependencies
+        requires:
+          - install_dependencies
+      - test_2_10:
+        requires:
+          - install_dependencies
       - test_lts_2_12:
-          requires:
-            - install_dependencies
+        requires:
+          - install_dependencies
+      - test_lts_2_16:
+        requires:
+          - install_dependencies
+      - test_lts_2_18:
+        requires:
+          - install_dependencies
+      - test_lts_3_0:
+        requires:
+          - install_dependencies
+      - test_lts_3_1:
+        requires:
+          - install_dependencies
+      - test_lts_3_2:
+        requires:
+          - install_dependencies
