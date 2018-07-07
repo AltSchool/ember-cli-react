@@ -202,3 +202,12 @@ workflows:
       - test_3_2:
           requires:
             - install_dependencies
+      - test_release:
+          requires:
+            - install_dependencies
+      - test_beta:
+          requires:
+            - install_dependencies
+      - test_canary:
+          requires:
+            - install_dependencies
