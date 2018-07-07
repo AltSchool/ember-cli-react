@@ -46,14 +46,23 @@ jobs:
           paths:
             - .
 
-  run_tests:
+  test_lts_2_8:
     <<: *defaults
     steps:
       - attach_workspace:
           at: .
       - run:
           name: Run Tests
-          command: npm test
+          command: ./node_modules/.bin/ember try:one ember-lts-2.8 --skip-cleanup=true
+
+  test_lts_2_12:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name: Run Tests
+          command: ./node_modules/.bin/ember try:one ember-lts-2.12 --skip-cleanup=true
 
 workflows:
   version: 2
@@ -63,6 +72,9 @@ workflows:
       - install_dependencies:
           requires:
             - checkout_code
-      - run_tests:
+      - test_lts_2_8:
+          requires:
+            - install_dependencies
+      - test_lts_2_12:
           requires:
             - install_dependencies
