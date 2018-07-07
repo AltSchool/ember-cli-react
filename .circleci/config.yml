@@ -109,32 +109,60 @@ jobs:
           name: Run Tests
           command: ./node_modules/.bin/ember try:one ember-lts-2.18 --skip-cleanup=true
 
-  test_lts_3_0:
+  test_3_0:
     <<: *defaults
     steps:
       - attach_workspace:
           at: .
       - run:
           name: Run Tests
-          command: ./node_modules/.bin/ember try:one ember-lts-3.0 --skip-cleanup=true
+          command: ./node_modules/.bin/ember try:one ember-3.0 --skip-cleanup=true
 
-  test_lts_3_1:
+  test_3_1:
     <<: *defaults
     steps:
       - attach_workspace:
           at: .
       - run:
           name: Run Tests
-          command: ./node_modules/.bin/ember try:one ember-lts-3.1 --skip-cleanup=true
+          command: ./node_modules/.bin/ember try:one ember-3.1 --skip-cleanup=true
 
-  test_lts_3_2:
+  test_3_2:
     <<: *defaults
     steps:
       - attach_workspace:
           at: .
       - run:
           name: Run Tests
-          command: ./node_modules/.bin/ember try:one ember-lts-3.2 --skip-cleanup=true
+          command: ./node_modules/.bin/ember try:one ember-3.2 --skip-cleanup=true
+
+  test_release:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name: Run Tests
+          command: ./node_modules/.bin/ember try:one ember-release --skip-cleanup=true
+
+
+  test_beta:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name: Run Tests
+          command: ./node_modules/.bin/ember try:one ember-beta --skip-cleanup=true
+
+  test_canary:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name: Run Tests
+          command: ./node_modules/.bin/ember try:one ember-canary --skip-cleanup=true
 
 workflows:
   version: 2
@@ -165,12 +193,12 @@ workflows:
       - test_lts_2_18:
           requires:
             - install_dependencies
-      - test_lts_3_0:
+      - test_3_0:
           requires:
             - install_dependencies
-      - test_lts_3_1:
+      - test_3_1:
           requires:
             - install_dependencies
-      - test_lts_3_2:
+      - test_3_2:
           requires:
             - install_dependencies
