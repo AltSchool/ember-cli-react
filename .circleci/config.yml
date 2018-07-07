@@ -145,32 +145,32 @@ workflows:
           requires:
             - checkout_code
       - test_1_13:
-        requires:
-          - install_dependencies
+          requires:
+            - install_dependencies
       - test_lts_2_4:
-        requires:
-          - install_dependencies
+          requires:
+            - install_dependencies
       - test_lts_2_8:
-        requires:
-          - install_dependencies
+          requires:
+            - install_dependencies
       - test_2_10:
-        requires:
-          - install_dependencies
+          requires:
+            - install_dependencies
       - test_lts_2_12:
-        requires:
-          - install_dependencies
+          requires:
+            - install_dependencies
       - test_lts_2_16:
-        requires:
-          - install_dependencies
+          requires:
+            - install_dependencies
       - test_lts_2_18:
-        requires:
-          - install_dependencies
+          requires:
+            - install_dependencies
       - test_lts_3_0:
-        requires:
-          - install_dependencies
+          requires:
+            - install_dependencies
       - test_lts_3_1:
-        requires:
-          - install_dependencies
+          requires:
+            - install_dependencies
       - test_lts_3_2:
-        requires:
-          - install_dependencies
+          requires:
+            - install_dependencies
