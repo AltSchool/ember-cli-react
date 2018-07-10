@@ -23,7 +23,9 @@ export default function hasBlock(emberComponent) {
   // This is a terrible but working way to get the value.
   if (!hasBlockSymbol) {
     const regex = /HAS_BLOCK/;
-    hasBlockSymbol = Object.keys(emberComponent).find(key => regex.test(key));
+    hasBlockSymbol = Object.getOwnPropertyNames(emberComponent).find(key =>
+      regex.test(key)
+    );
   }
 
   return Ember.get(emberComponent, hasBlockSymbol);
