@@ -12,6 +12,7 @@ module.exports = {
     es6: true,
     node: true,
     browser: true,
+    mocha: true,
   },
   rules: {
     'prettier/prettier': 'warn',
