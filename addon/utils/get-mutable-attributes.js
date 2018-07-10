@@ -1,12 +1,17 @@
 import Ember from 'ember';
+import emberVersionInfo from './ember-version-info';
 
-const [major, minor] = Ember.VERSION.split('.');
-const isGlimmer = major > 2 || (major == 2 && minor >= 10); // >= 2.10
+const { major, minor, isGlimmer } = emberVersionInfo();
 
 let getMutValue;
 
 if (isGlimmer) {
-  const { MUTABLE_CELL } = Ember.__loader.require('ember-views/compat/attrs');
+  // The module location changed since v3.2
+  let libPath =
+    major > 3 || (major == 3 && minor >= 2)
+      ? 'ember-views/lib/compat/attrs'
+      : 'ember-views/compat/attrs';
+  const { MUTABLE_CELL } = Ember.__loader.require(libPath);
   getMutValue = value => {
     if (value && value[MUTABLE_CELL]) {
       return value.value;

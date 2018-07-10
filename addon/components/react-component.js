@@ -4,6 +4,7 @@ import ReactDOM from 'npm:react-dom';
 import YieldWrapper from './react-component/yield-wrapper';
 
 import getMutableAttributes from 'ember-cli-react/utils/get-mutable-attributes';
+import hasBlock from 'ember-cli-react/utils/has-block';
 import lookupFactory from 'ember-cli-react/utils/lookup-factory';
 
 const { get } = Ember;
@@ -57,8 +58,15 @@ const ReactComponent = Ember.Component.extend({
     if (!children) {
       const childNodes = get(this, 'element.childNodes');
 
-      // We do not need to do anything if there is no child nodes
-      if (childNodes.length > 0) {
+      // In Ember 2.8, an empty comment node is still created for non-block form
+      // component. This behavior breaks any component that does not expect
+      // children to exist.
+      // We can safely assume that there is no child node if:
+      // - The component is not in block form
+      // - There is no child node (of course)
+
+      // For other cases, we need to create a YieldWrapper to hold the nodes
+      if (hasBlock(this) && childNodes.length > 0) {
         children = [
           React.createElement(YieldWrapper, {
             key: get(this, 'elementId'),

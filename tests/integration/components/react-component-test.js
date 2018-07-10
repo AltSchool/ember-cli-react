@@ -222,6 +222,48 @@ describeComponent(
       ).to.match(/^Rendered correctly$/);
     });
 
+    it('does not create YieldWrapper when there is no child, but the component has children inside', function() {
+      this.render(hbs`{{no-yield-wrapper-with-own-children}}`);
+
+      // If YieldWrapper is created, it will not render correctly.
+      const anchors = this.$('a');
+      expect(anchors.length).to.equals(2);
+      expect(
+        anchors
+          .eq(0)
+          .text()
+          .trim()
+      ).to.equals('Link 1');
+      expect(
+        anchors
+          .eq(1)
+          .text()
+          .trim()
+      ).to.equals('Link 2');
+    });
+
+    it('does not create YieldWrapper when there is no child, even after rerendering', function() {
+      this.set('text', 'show me!');
+      this.render(hbs`{{no-yield-wrapper-with-props text=text}}`);
+
+      // If YieldWrapper is created, it will not render correctly.
+      expect(
+        this.$()
+          .text()
+          .trim()
+      ).to.match(/^Rendered correctly with "show me!"$/);
+
+      // This test is needed because on a re-render, there is already a
+      // non-comment child node (span) created by React. So simply checking
+      // single comment node won't work.
+      this.set('text', 'rerender me!');
+      expect(
+        this.$()
+          .text()
+          .trim()
+      ).to.match(/^Rendered correctly with "rerender me!"$/);
+    });
+
     it('rerenders on state change', function() {
       this.render(hbs`{{react-component "say-hi" name=name}}`);
       this.set('name', 'Owen');
