@@ -14,20 +14,10 @@ defaults: &defaults
 
 version: 2
 jobs:
-  checkout_code:
+  setup_environment:
     <<: *defaults
     steps:
       - checkout
-      - persist_to_workspace:
-          root: .
-          paths:
-            - .
-
-  install_dependencies:
-    <<: *defaults
-    steps:
-      - attach_workspace:
-          at: .
       # Download and cache dependencies
       - restore_cache:
           keys:
@@ -168,46 +158,43 @@ workflows:
   version: 2
   test:
     jobs:
-      - checkout_code
-      - install_dependencies:
-          requires:
-            - checkout_code
+      - setup_environment
       - test_1_13:
           requires:
-            - install_dependencies
+            - setup_environment
       - test_lts_2_4:
           requires:
-            - install_dependencies
+            - setup_environment
       - test_lts_2_8:
           requires:
-            - install_dependencies
+            - setup_environment
       - test_2_10:
           requires:
-            - install_dependencies
+            - setup_environment
       - test_lts_2_12:
           requires:
-            - install_dependencies
+            - setup_environment
       - test_lts_2_16:
           requires:
-            - install_dependencies
+            - setup_environment
       - test_lts_2_18:
           requires:
-            - install_dependencies
+            - setup_environment
       - test_3_0:
           requires:
-            - install_dependencies
+            - setup_environment
       - test_3_1:
           requires:
-            - install_dependencies
+            - setup_environment
       - test_3_2:
           requires:
-            - install_dependencies
+            - setup_environment
       - test_release:
           requires:
-            - install_dependencies
+            - setup_environment
       - test_beta:
           requires:
-            - install_dependencies
+            - setup_environment
       - test_canary:
           requires:
-            - install_dependencies
+            - setup_environment
