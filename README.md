@@ -1,6 +1,10 @@
 **Experimental Addon**
 
-This was built as a prototype to evaluate using react inside of our Ember apps. We are not yet using it in production. PRs and constructive questions and comments via [GitHub issues](https://github.com/AltSchool/ember-cli-react/issues/new) are highly encouraged.
+This was built as a prototype to evaluate using react inside of our Ember apps.
+We are not yet using it in production. PRs and constructive questions and
+comments via [GitHub
+issues](https://github.com/AltSchool/ember-cli-react/issues/new) are highly
+encouraged.
 
 # ember-cli-react
 
@@ -53,7 +57,8 @@ Then render your component in a handlebars template:
 
 ## Block Form
 
-Your React component can be used in block form to allow composition with existing Ember or React components.
+Your React component can be used in block form to allow composition with
+existing Ember or React components.
 
 ```handlebars
 {{#react-panel}}
@@ -63,8 +68,9 @@ Your React component can be used in block form to allow composition with existin
 
 The children of `react-panel` will be populated to `props.children`.
 
-Note that if the children contains mutating structure (e.g. `{{if}}`, `{{each}}`),
-you need to wrap them in a stable tag to work around [this Glimmer issue](https://github.com/yapplabs/ember-wormhole/issues/66#issuecomment-263575168).
+Note that if the children contains mutating structure (e.g. `{{if}}`,
+`{{each}}`), you need to wrap them in a stable tag to work around [this Glimmer
+issue](https://github.com/yapplabs/ember-wormhole/issues/66#issuecomment-263575168).
 
 ```handlebars
 {{#react-panel}}
@@ -78,8 +84,39 @@ you need to wrap them in a stable tag to work around [this Glimmer issue](https:
 {{/react-panel}}
 ```
 
-Although this is possible, block form should be used as a tool to migrate Ember to React
-without the hard requirement to start with leaf components. It is highly recommended to have clean React component tree whenever possible for best performance.
+Although this is possible, block form should be used as a tool to migrate Ember
+to React without the hard requirement to start with leaf components. It is
+highly recommended to have clean React component tree whenever possible for best
+performance.
+
+## Using File Name Convention for React
+
+React is unopinionated with file name convention. However, the majority of the
+community has still developed some conventions over time.
+
+For React component files, the widely adopted convention is PascalCase,
+including
+[Airbnb](https://github.com/airbnb/javascript/tree/master/react#naming). So we
+have added support for this convention.
+
+```handlebars
+{{!-- Either `user-avatar.jsx` or `UserAvatar.jsx` works --}}
+{{user-avatar}}
+```
+
+### Single-worded Component
+
+Ember requires at least a dash for component names. So single-worded component
+(e.g. `Avatar`) cannot be used directly in Handlebars. However, you can still use
+single-worded component with `react-component` component.
+
+```handlebars
+{{!-- This won't work because Ember requires a dash for component --}}
+{{avatar}}
+
+{{!-- This works --}}
+{{react-component 'avatar'}}
+```
 
 ## Mini Todo List Example
 
@@ -176,6 +213,9 @@ export default class TodoItem extends React.Component {
 
 ## What's Missing
 
-There is no React `link-to` equivalent for linking to Ember routes inside of your React code. Instead pass action handlers that call `transitionTo` from an Ember route or component.
+There is no React `link-to` equivalent for linking to Ember routes inside of
+your React code. Instead pass action handlers that call `transitionTo` from an
+Ember route or component.
 
-In order to create minified production builds of React you must set `NODE_ENV=production`.
+In order to create minified production builds of React you must set
+`NODE_ENV=production`.

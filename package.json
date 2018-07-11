@@ -21,7 +21,7 @@
       "eslint --fix",
       "git add"
     ],
-    "+(*.{json,css}|.prettierrc|.watchmanconfig)": [
+    "+(*.{json,css,md}|.prettierrc|.watchmanconfig)": [
       "prettier --write",
       "git add"
     ]
