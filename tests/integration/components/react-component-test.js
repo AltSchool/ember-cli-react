@@ -334,6 +334,16 @@ describeComponent(
         ).to.equal('My file name is ReactStyleFileName');
       });
 
+      it('supports React-style component file name even without dash', function() {
+        this.render(hbs`{{react-component "card"}}`);
+
+        expect(
+          this.$()
+            .text()
+            .trim()
+        ).to.equal('I am a Card component, I have no dash!');
+      });
+
       it('supports React-style component file name when rendering directly', function() {
         this.render(hbs`{{react-style-file-name}}`);
 
