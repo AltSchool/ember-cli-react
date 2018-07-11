@@ -323,6 +323,26 @@ describeComponent(
 
         expect(this.$().text()).to.contain('Hello Morgan');
       });
+
+      it('supports React-style component file name', function() {
+        this.render(hbs`{{react-component "react-style-file-name"}}`);
+
+        expect(
+          this.$()
+            .text()
+            .trim()
+        ).to.equal('My file name is ReactStyleFileName');
+      });
+
+      it('supports React-style component file name when rendering directly', function() {
+        this.render(hbs`{{react-style-file-name}}`);
+
+        expect(
+          this.$()
+            .text()
+            .trim()
+        ).to.equal('My file name is ReactStyleFileName');
+      });
     });
   }
 );
