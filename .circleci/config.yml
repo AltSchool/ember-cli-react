@@ -1,0 +1,200 @@
+# Javascript Node CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-javascript/ for more details
+#
+
+# CircleCI maintains a library of pre-built images
+# documented at https://circleci.com/docs/2.0/circleci-images/
+
+# Default values
+defaults: &defaults
+  docker:
+    - image: circleci/node:6-browsers
+  working_directory: ~/ember-cli-react
+
+version: 2
+jobs:
+  setup_environment:
+    <<: *defaults
+    steps:
+      - checkout
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "package.json" }}
+          # fallback to using the latest cache if no exact match is found
+          - v1-dependencies-
+      - run:
+          name: Install Packages
+          command: npm install
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+      - persist_to_workspace:
+          root: .
+          paths:
+            - .
+
+  test_1_13:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name: Run Tests
+          command: ./node_modules/.bin/ember try:one ember-1.13 --skip-cleanup=true
+
+  test_lts_2_4:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name: Run Tests
+          command: ./node_modules/.bin/ember try:one ember-lts-2.4 --skip-cleanup=true
+
+  test_lts_2_8:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name: Run Tests
+          command: ./node_modules/.bin/ember try:one ember-lts-2.8 --skip-cleanup=true
+
+  test_2_10:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name: Run Tests
+          command: ./node_modules/.bin/ember try:one ember-2.10 --skip-cleanup=true
+
+  test_lts_2_12:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name: Run Tests
+          command: ./node_modules/.bin/ember try:one ember-lts-2.12 --skip-cleanup=true
+
+  test_lts_2_16:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name: Run Tests
+          command: ./node_modules/.bin/ember try:one ember-lts-2.16 --skip-cleanup=true
+
+  test_lts_2_18:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name: Run Tests
+          command: ./node_modules/.bin/ember try:one ember-lts-2.18 --skip-cleanup=true
+
+  test_3_0:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name: Run Tests
+          command: ./node_modules/.bin/ember try:one ember-3.0 --skip-cleanup=true
+
+  test_3_1:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name: Run Tests
+          command: ./node_modules/.bin/ember try:one ember-3.1 --skip-cleanup=true
+
+  test_3_2:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name: Run Tests
+          command: ./node_modules/.bin/ember try:one ember-3.2 --skip-cleanup=true
+
+  test_release:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name: Run Tests
+          command: ./node_modules/.bin/ember try:one ember-release --skip-cleanup=true
+
+
+  test_beta:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name: Run Tests
+          command: ./node_modules/.bin/ember try:one ember-beta --skip-cleanup=true
+
+  test_canary:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name: Run Tests
+          command: ./node_modules/.bin/ember try:one ember-canary --skip-cleanup=true
+
+workflows:
+  version: 2
+  test:
+    jobs:
+      - setup_environment
+      - test_1_13:
+          requires:
+            - setup_environment
+      - test_lts_2_4:
+          requires:
+            - setup_environment
+      - test_lts_2_8:
+          requires:
+            - setup_environment
+      - test_2_10:
+          requires:
+            - setup_environment
+      - test_lts_2_12:
+          requires:
+            - setup_environment
+      - test_lts_2_16:
+          requires:
+            - setup_environment
+      - test_lts_2_18:
+          requires:
+            - setup_environment
+      - test_3_0:
+          requires:
+            - setup_environment
+      - test_3_1:
+          requires:
+            - setup_environment
+      - test_3_2:
+          requires:
+            - setup_environment
+      - test_release:
+          requires:
+            - setup_environment
+      - test_beta:
+          requires:
+            - setup_environment
+      - test_canary:
+          requires:
+            - setup_environment
