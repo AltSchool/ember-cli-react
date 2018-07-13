@@ -1,4 +1,4 @@
-import React from 'npm:react';
+import React from 'react';
 
 const FaccWrapper = props => {
   return <span>Warning: {props.children('supported but anti-pattern')}</span>;

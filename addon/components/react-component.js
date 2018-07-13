@@ -1,6 +1,6 @@
 import Ember from 'ember';
-import React from 'npm:react';
-import ReactDOM from 'npm:react-dom';
+import React from 'react';
+import ReactDOM from 'react-dom';
 import YieldWrapper from './react-component/yield-wrapper';
 
 import getMutableAttributes from 'ember-cli-react/utils/get-mutable-attributes';

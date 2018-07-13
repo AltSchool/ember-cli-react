@@ -1,13 +1,11 @@
 /*jshint node:true*/
 
-var RSVP = require('rsvp');
 var pkg = require('../../package.json');
 
-function getDependencyVersion(packageJson, name) {
-  var dependencies = packageJson.dependencies;
-  var devDependencies = packageJson.devDependencies;
+function getPeerDependencyVersion(packageJson, name) {
+  var peerDependencies = packageJson.peerDependencies;
 
-  return dependencies[name] || devDependencies[name];
+  return peerDependencies[name];
 }
 
 module.exports = {
@@ -17,16 +15,16 @@ module.exports = {
 
   // Install react into host app
   afterInstall: function() {
-    return RSVP.all([
-      this.addPackageToProject(
-        'ember-browserify',
-        getDependencyVersion(pkg, 'ember-browserify')
-      ),
-      this.addPackageToProject('react', getDependencyVersion(pkg, 'react')),
-      this.addPackageToProject(
-        'react-dom',
-        getDependencyVersion(pkg, 'react-dom')
-      ),
-    ]);
+    const packages = [
+      {
+        name: 'react',
+        target: getPeerDependencyVersion(pkg, 'react'),
+      },
+      {
+        name: 'react-dom',
+        target: getPeerDependencyVersion(pkg, 'react-dom'),
+      },
+    ];
+    return this.addPackagesToProject(packages);
   },
 };

@@ -1,4 +1,4 @@
-**This is ALPHA Software**
+**Experimental Addon**
 
 This was built as a prototype to evaluate using react inside of our Ember apps. We are not yet using it in production. PRs and constructive questions and comments via [GitHub issues](https://github.com/AltSchool/ember-cli-react/issues/new) are highly encouraged.
 
@@ -7,9 +7,9 @@ This was built as a prototype to evaluate using react inside of our Ember apps. 
 [![Circle CI](https://circleci.com/gh/AltSchool/ember-cli-react.svg?style=shield)](https://circleci.com/gh/AltSchool/ember-cli-react)
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 
-Use React component hierarchies inside your Ember app.
+Use clean React component hierarchies inside your Ember app.
 
-## Overview
+## Install
 
 Install the addon in your app:
 
@@ -17,15 +17,30 @@ Install the addon in your app:
 ember install ember-cli-react
 ```
 
-Write your first JSX React component:
+If you prefer npm/yarn install (the following is similar with above):
+
+```
+yarn add --dev ember-cli-react
+
+# This triggers addon blueprint to do necessary setup
+ember generate ember-cli-react
+```
+
+**NOTE**:
+`ember-cli-react` relies on a custom resolver to discover components. If you have
+installed `ember-cli-react` with the standard way then you should be fine. Otherwise, you will need to manually update the first line of `app/resolver.js` to `import Resolver from 'ember-cli-react/resolver';`.
+
+## Usage
+
+Write your React component as usual:
 
 ```javascript
 // app/components/say-hi.jsx
-import React from 'npm:react';
+import React from 'react';
 
-export default function(props) {
-  return <span>Hello {props.name}</span>;
-}
+const SayHi = props => <span>Hello {props.name}</span>;
+
+export default SayHi;
 ```
 
 Then render your component in a handlebars template:
@@ -34,14 +49,11 @@ Then render your component in a handlebars template:
 {{say-hi name="Alex"}}
 ```
 
-**NOTE**: If you install `ember-cli-react` using npm or yarn install, instead of
-the ember install command, then you will need to manually update the first line
-of `app/resolver.js` to `import Resolver from 'ember-cli-react/resolver';`.
+**NOTE**: Currently, `ember-cli-react` recognizes React components with `.jsx` extension only.
 
 ## Block Form
 
-Your React component can be used in block form to allow composition with existing
-Ember or React components.
+Your React component can be used in block form to allow composition with existing Ember or React components.
 
 ```handlebars
 {{#react-panel}}
@@ -124,7 +136,7 @@ export default Ember.Controller.extend({
 #### app/components/todo-list.jsx
 
 ```jsx
-import React from 'npm:react';
+import React from 'react';
 import TodoItem from './todo-item';
 
 export default function(props) {
@@ -141,8 +153,8 @@ export default function(props) {
 #### app/components/todo-item.jsx
 
 ```jsx
-import React from 'npm:react';
-import ReactDOM from 'npm:react-dom';
+import React from 'react';
+import ReactDOM from 'react-dom';
 
 export default class TodoItem extends React.Component {
   render() {

@@ -35,7 +35,6 @@
   "devDependencies": {
     "broccoli-asset-rev": "^2.4.5",
     "ember-ajax": "^3.0.0",
-    "ember-browserify": "^1.1.7",
     "ember-cli": "~2.15.1",
     "ember-cli-chai": "^0.4.1",
     "ember-cli-dependency-checker": "^2.0.0",
@@ -60,15 +59,18 @@
     "husky": "^0.14.3",
     "lint-staged": "^5.0.0",
     "loader.js": "^4.2.3",
-    "prettier": "^1.9.2",
+    "prettier": "^1.9.2"
+  },
+  "dependencies": {
+    "broccoli-react": "^0.8.0",
+    "ember-auto-import": "^1.0.1",
+    "ember-cli-babel": "^6.3.0",
     "react": "^15.5.4",
     "react-dom": "^15.5.4"
   },
-  "dependencies": {
-    "bower": "^1.8.2",
-    "broccoli-react": "^0.8.0",
-    "ember-cli-babel": "^6.3.0",
-    "rsvp": "^3.2.1"
+  "peerDependencies": {
+    "react": "^15.5.4 || ^16.0.0",
+    "react-dom": "^15.5.4 || ^16.0.0"
   },
   "ember-addon": {
     "configPath": "tests/dummy/config"
