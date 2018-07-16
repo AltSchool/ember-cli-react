@@ -46,9 +46,10 @@ export default Resolver.extend({
   // A React-style file name is capitalized camel-cased.
   resolveReactStyleFile(parsedName) {
     const originalName = parsedName.fullNameWithoutType;
-    parsedName.fullNameWithoutType = Ember.String.classify(originalName);
-    const result = this.resolveOther(parsedName);
-    parsedName.fullNameWithoutType = originalName;
+    const parsedNameWithPascalCase = Object.assign({}, parsedName, {
+      fullNameWithoutType: Ember.String.classify(originalName),
+    });
+    const result = this.resolveOther(parsedNameWithPascalCase);
     return result;
   },
 });
