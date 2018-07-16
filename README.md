@@ -30,15 +30,16 @@ yarn add --dev ember-cli-react
 ember generate ember-cli-react
 ```
 
-**NOTE**:
-`ember-cli-react` relies on a custom resolver to discover components. If you have
-installed `ember-cli-react` with the standard way then you should be fine. Otherwise, you will need to manually update the first line of `app/resolver.js` to `import Resolver from 'ember-cli-react/resolver';`.
+**NOTE**: `ember-cli-react` relies on a custom resolver to discover components.
+If you have installed `ember-cli-react` with the standard way then you should be
+fine. Otherwise, you will need to manually update the first line of
+`app/resolver.js` to `import Resolver from 'ember-cli-react/resolver';`.
 
 ## Usage
 
 Write your React component as usual:
 
-```javascript
+```jsx
 // app/components/say-hi.jsx
 import React from 'react';
 
@@ -53,7 +54,8 @@ Then render your component in a handlebars template:
 {{say-hi name="Alex"}}
 ```
 
-**NOTE**: Currently, `ember-cli-react` recognizes React components with `.jsx` extension only.
+**NOTE**: Currently, `ember-cli-react` recognizes React components with `.jsx`
+extension only.
 
 ## Block Form
 
@@ -99,16 +101,39 @@ including
 [Airbnb](https://github.com/airbnb/javascript/tree/master/react#naming). So we
 have added support for this convention.
 
+In short, you can name your JSX files in `PascalCase`, in addition to
+`snake-case`.
+
 ```handlebars
-{{!-- Either `user-avatar.jsx` or `UserAvatar.jsx` works --}}
+{{!-- Both `user-avatar.jsx` and `UserAvatar.jsx` work --}}
 {{user-avatar}}
+```
+
+### Rendering in Template
+
+When using the `react-component` component, referencing your React components
+with `PascalCase` is also supported. However, due to the "at least one dash"
+policy, it won't work if the component name is used directly.
+
+```handlebars
+{{!-- OK! --}}
+{{react-component "user-avatar"}}
+
+{{!-- OK! --}}
+{{react-component "UserAvatar"}}
+
+{{!-- OK! --}}
+{{user-avatar}}
+
+{{!-- NOT OK! --}}
+{{UserAvatar}}
 ```
 
 ### Single-worded Component
 
 Ember requires at least a dash for component names. So single-worded component
-(e.g. `Avatar`) cannot be used directly in Handlebars. However, you can still use
-single-worded component with `react-component` component.
+(e.g. `Avatar`) cannot be used directly in Handlebars. However, you can still
+use single-worded component with `react-component` component.
 
 ```handlebars
 {{!-- This won't work because Ember requires a dash for component --}}
@@ -117,6 +142,24 @@ single-worded component with `react-component` component.
 {{!-- This works --}}
 {{react-component 'avatar'}}
 ```
+
+### Fallback to `snake-case` file name
+
+Whenever there is a conflict, component files with Ember-style convention will
+be used.
+
+Examples:
+
+- When both `SameName.jsx` and `same-name.jsx` exist, `same-name.jsx` will be
+  used.
+- When both `SameName.jsx` and `same-name.js` (Ember) exist, `same-name.js` will
+  be used
+
+#### Known issue
+
+If an Ember component and a React component has a same name (`same-name.js` and
+`same-name.jsx`), the file with `.js` extension will be overwritten with the
+output of `same-name.jsx`. We are still looking at ways to resolve this.
 
 ## Mini Todo List Example
 
