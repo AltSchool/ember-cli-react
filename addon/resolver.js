@@ -10,10 +10,10 @@ export default Resolver.extend({
   // For example, having `{{foo-bar}}` in a template will trigger `resolveComponent`
   // with the name full name of `component:foo-bar`.
   resolveComponent(parsedName) {
-    // First try to resolve with the convention of Ember CLI via `resolveOther`.
-    // If nothing is found, try again with React-styled file name (e.g. SayHi).
+    // First try to resolve with React-styled file name (e.g. SayHi).
+    // If nothing is found, try again with original convention via `resolveOther`.
     let result =
-      this.resolveOther(parsedName) || this.resolveReactStyleFile(parsedName);
+      this.resolveReactStyleFile(parsedName) || this.resolveOther(parsedName);
 
     // If there is no result found after all, return nothing
     if (!result) {
@@ -37,17 +37,23 @@ export default Resolver.extend({
   resolveReactComponent(parsedName) {
     parsedName.type = 'component';
     const result =
-      this.resolveOther(parsedName) || this.resolveReactStyleFile(parsedName);
+      this.resolveReactStyleFile(parsedName) || this.resolveOther(parsedName);
     parsedName.type = 'react-component';
     return result;
   },
 
   // This resolver method attempt to find a file with React-style file name.
-  // A React-style file name is capitalized camel-cased.
+  // A React-style file name is in PascalCase.
   resolveReactStyleFile(parsedName) {
     const originalName = parsedName.fullNameWithoutType;
+
+    // Convert the compnent name while preserving namespaces
+    const parts = originalName.split('/');
+    parts[parts.length - 1] = Ember.String.classify(parts[parts.length - 1]);
+    const newName = parts.join('/');
+
     const parsedNameWithPascalCase = Object.assign({}, parsedName, {
-      fullNameWithoutType: Ember.String.classify(originalName),
+      fullNameWithoutType: newName,
     });
     const result = this.resolveOther(parsedNameWithPascalCase);
     return result;

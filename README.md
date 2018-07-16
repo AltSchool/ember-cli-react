@@ -143,21 +143,21 @@ use single-worded component with `react-component` component.
 {{react-component 'avatar'}}
 ```
 
-### Fallback to `snake-case` file name
+### React Components are Prioritised
 
-Whenever there is a conflict, component files with Ember-style convention will
+Whenever there is a conflict, component files with React-style convention will
 be used.
 
 Examples:
 
-- When both `SameName.jsx` and `same-name.jsx` exist, `same-name.jsx` will be
-  used.
-- When both `SameName.jsx` and `same-name.js` (Ember) exist, `same-name.js` will
+- When both `SameName.jsx` and `same-name.jsx` exist, `SameName.jsx` will be
+  used
+- When both `SameName.jsx` and `same-name.js` (Ember) exist, `SameName.jsx` will
   be used
 
 #### Known issue
 
-If an Ember component and a React component has a same name (`same-name.js` and
+If an Ember component and a React component has exactly the same name but different extension (`same-name.js` and
 `same-name.jsx`), the file with `.js` extension will be overwritten with the
 output of `same-name.jsx`. We are still looking at ways to resolve this.
 
