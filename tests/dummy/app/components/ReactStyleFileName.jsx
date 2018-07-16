@@ -1,4 +1,4 @@
-import React from 'npm:react';
+import React from 'react';
 
 const ReactStyleFileName = () => {
   return <span>My file name is ReactStyleFileName</span>;

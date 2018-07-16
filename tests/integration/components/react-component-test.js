@@ -325,6 +325,16 @@ describeComponent(
       });
 
       it('supports React-style component file name', function() {
+        this.render(hbs`{{react-component "ReactStyleFileName"}}`);
+
+        expect(
+          this.$()
+            .text()
+            .trim()
+        ).to.equal('My file name is ReactStyleFileName');
+      });
+
+      it('supports React-style component file name, but render with Ember style name', function() {
         this.render(hbs`{{react-component "react-style-file-name"}}`);
 
         expect(
@@ -352,6 +362,62 @@ describeComponent(
             .text()
             .trim()
         ).to.equal('My file name is ReactStyleFileName');
+      });
+
+      describe('when there are two JSX files with the same name but different casing', function() {
+        it('prioritises Ember-cli-style file name (snake-case)', function() {
+          this.render(hbs`{{react-component "SameNameJsx"}}`);
+
+          expect(
+            this.$()
+              .text()
+              .trim()
+          ).to.equal('My file name is "same-name-jsx.jsx"');
+        });
+
+        it('prioritises Ember-cli-style file name (snake-case) when render with Ember-style name', function() {
+          this.render(hbs`{{react-component "same-name-jsx"}}`);
+
+          expect(
+            this.$()
+              .text()
+              .trim()
+          ).to.equal('My file name is "same-name-jsx.jsx"');
+        });
+
+        it('prioritises Ember-cli-style file name (snake-case) when rendering directly', function() {
+          this.render(hbs`{{same-name-jsx}}`);
+
+          expect(
+            this.$()
+              .text()
+              .trim()
+          ).to.equal('My file name is "same-name-jsx.jsx"');
+        });
+      });
+
+      // The React file will overwrite Ember file as that's how Broccoli-React works.
+      // Skipping this to keep this in mind.
+      describe.skip('when the JSX file has same name with Ember component file but different extension', function() {
+        it('prioritises the Ember component', function() {
+          this.render(hbs`{{react-component "same-name-ember"}}`);
+
+          expect(
+            this.$()
+              .text()
+              .trim()
+          ).to.equal('I am an Ember component');
+        });
+
+        it('prioritises the Ember component when rendering directly', function() {
+          this.render(hbs`{{same-name-ember}}`);
+
+          expect(
+            this.$()
+              .text()
+              .trim()
+          ).to.equal('I am an Ember component');
+        });
       });
     });
   }
