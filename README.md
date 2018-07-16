@@ -1,6 +1,6 @@
 **Experimental Addon**
 
-This was built as a prototype to evaluate using react inside of our Ember apps.
+This was built as a prototype to evaluate using React inside of our Ember apps.
 We are not yet using it in production. PRs and constructive questions and
 comments via [GitHub
 issues](https://github.com/AltSchool/ember-cli-react/issues/new) are highly
@@ -140,7 +140,7 @@ use single-worded component with `react-component` component.
 {{avatar}}
 
 {{!-- This works --}}
-{{react-component 'avatar'}}
+{{react-component 'Avatar'}}
 ```
 
 ### React Components are Prioritised

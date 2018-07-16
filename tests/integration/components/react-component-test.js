@@ -364,7 +364,17 @@ describeComponent(
         ).to.equal('My file name is ReactStyleFileName');
       });
 
-      it('supports React-style component file name even when namespaced', function() {
+      it('supports React-style component file name with namespace', function() {
+        this.render(hbs`{{react-component "namespace/InsideNamespace"}}`);
+
+        expect(
+          this.$()
+            .text()
+            .trim()
+        ).to.equal('I am inside a namespace!');
+      });
+
+      it('supports React-style component file name when rendering directly with namespace', function() {
         this.render(hbs`{{namespace/inside-namespace}}`);
 
         expect(
