@@ -5,17 +5,21 @@ const { major, minor, isGlimmer } = emberVersionInfo();
 
 let hasBlockSymbol;
 
-if (major > 3 || (major == 3 && minor >= 1)) {
-  // Ember-glimmer moved to TypeScript since v3.1
-  // Do nothing since the symbol is not exported
-} else if (isGlimmer) {
-  hasBlockSymbol = Ember.__loader.require('ember-glimmer/component')[
-    'HAS_BLOCK'
-  ];
-} else {
-  hasBlockSymbol = Ember.__loader.require('ember-htmlbars/component')[
-    'HAS_BLOCK'
-  ];
+try {
+  if (major > 3 || (major == 3 && minor >= 1)) {
+    // Ember-glimmer moved to TypeScript since v3.1
+    // Do nothing since the symbol is not exported
+  } else if (isGlimmer) {
+    hasBlockSymbol = Ember.__loader.require('ember-glimmer/component')[
+      'HAS_BLOCK'
+    ];
+  } else {
+    hasBlockSymbol = Ember.__loader.require('ember-htmlbars/component')[
+      'HAS_BLOCK'
+    ];
+  }
+} catch (e) {
+  // Fallback to use runtime check
 }
 
 // NOTE: I really don't know how to test this
