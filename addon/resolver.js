@@ -13,7 +13,7 @@ export default Resolver.extend({
     // First try to resolve with React-styled file name (e.g. SayHi).
     // If nothing is found, try again with original convention via `resolveOther`.
     let result =
-      this.resolveReactStyleFile(parsedName) || this.resolveOther(parsedName);
+      this._resolveReactStyleFile(parsedName) || this.resolveOther(parsedName);
 
     // If there is no result found after all, return nothing
     if (!result) {
@@ -37,14 +37,16 @@ export default Resolver.extend({
   resolveReactComponent(parsedName) {
     parsedName.type = 'component';
     const result =
-      this.resolveReactStyleFile(parsedName) || this.resolveOther(parsedName);
+      this._resolveReactStyleFile(parsedName) || this.resolveOther(parsedName);
     parsedName.type = 'react-component';
     return result;
   },
 
   // This resolver method attempt to find a file with React-style file name.
   // A React-style file name is in PascalCase.
-  resolveReactStyleFile(parsedName) {
+  // This is made a private method to prevent creation of "react-style-file:*"
+  // factory.
+  _resolveReactStyleFile(parsedName) {
     const originalName = parsedName.fullNameWithoutType;
 
     // Convert the compnent name while preserving namespaces
