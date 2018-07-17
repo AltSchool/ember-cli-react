@@ -323,6 +323,156 @@ describeComponent(
 
         expect(this.$().text()).to.contain('Hello Morgan');
       });
+
+      it('supports React-style component file name', function() {
+        this.render(hbs`{{react-component "ReactStyleFileName"}}`);
+
+        expect(
+          this.$()
+            .text()
+            .trim()
+        ).to.equal('My file name is ReactStyleFileName');
+      });
+
+      it('supports React-style component file name, but render with Ember style name', function() {
+        this.render(hbs`{{react-component "react-style-file-name"}}`);
+
+        expect(
+          this.$()
+            .text()
+            .trim()
+        ).to.equal('My file name is ReactStyleFileName');
+      });
+
+      it('supports React-style component file name even without dash', function() {
+        this.render(hbs`{{react-component "card"}}`);
+
+        expect(
+          this.$()
+            .text()
+            .trim()
+        ).to.equal('I am a Card component, I have no dash!');
+      });
+
+      it('supports React-style component file name when rendering directly', function() {
+        this.render(hbs`{{react-style-file-name}}`);
+
+        expect(
+          this.$()
+            .text()
+            .trim()
+        ).to.equal('My file name is ReactStyleFileName');
+      });
+
+      it('supports React-style component file name with namespace', function() {
+        this.render(hbs`{{react-component "namespace/InsideNamespace"}}`);
+
+        expect(
+          this.$()
+            .text()
+            .trim()
+        ).to.equal('I am inside a namespace!');
+      });
+
+      it('supports React-style component file name when rendering directly with namespace', function() {
+        this.render(hbs`{{namespace/inside-namespace}}`);
+
+        expect(
+          this.$()
+            .text()
+            .trim()
+        ).to.equal('I am inside a namespace!');
+      });
+
+      describe('when both `SameNameJsx.jsx` and `same-name-jsx.jsx` exist', function() {
+        it('prioritises React-style file name (SameNameJsx.jsx)', function() {
+          this.render(hbs`{{react-component "SameNameJsx"}}`);
+
+          expect(
+            this.$()
+              .text()
+              .trim()
+          ).to.equal('My file name is "SameNameJsx.jsx"');
+        });
+
+        it('prioritises React-style file name (SameNameJsx.jsx) when render with Ember-style name', function() {
+          this.render(hbs`{{react-component "same-name-jsx"}}`);
+
+          expect(
+            this.$()
+              .text()
+              .trim()
+          ).to.equal('My file name is "SameNameJsx.jsx"');
+        });
+
+        it('prioritises React-style file name (SameNameJsx.jsx) when rendering directly', function() {
+          this.render(hbs`{{same-name-jsx}}`);
+
+          expect(
+            this.$()
+              .text()
+              .trim()
+          ).to.equal('My file name is "SameNameJsx.jsx"');
+        });
+      });
+
+      describe('when both `SameNameDifferentCaseMixed.jsx` and `same-name-different-case-mixed.js` (Ember) exist', function() {
+        it('prioritises the React component (SameNameDifferentCaseMixed.jsx)', function() {
+          this.render(hbs`{{react-component "SameNameDifferentCaseMixed"}}`);
+
+          expect(
+            this.$()
+              .text()
+              .trim()
+          ).to.equal('My file name is "SameNameDifferentCaseMixed.jsx"');
+        });
+
+        it('prioritises the React component (SameNameDifferentCaseMixed.jsx) when render with Ember-style name', function() {
+          this.render(
+            hbs`{{react-component "same-name-different-case-mixed"}}`
+          );
+
+          expect(
+            this.$()
+              .text()
+              .trim()
+          ).to.equal('My file name is "SameNameDifferentCaseMixed.jsx"');
+        });
+
+        it('prioritises the React component (SameNameDifferentCaseMixed.jsx) when rendering directly', function() {
+          this.render(hbs`{{same-name-different-case-mixed}}`);
+
+          expect(
+            this.$()
+              .text()
+              .trim()
+          ).to.equal('My file name is "SameNameDifferentCaseMixed.jsx"');
+        });
+      });
+
+      // The React file will overwrite Ember file as that's how Broccoli-React works.
+      // Skipping this to keep this in mind.
+      describe.skip('when both `same-name-same-case-mixed.jsx` and `same-name-same-case-mixed.js` (Ember) exist', function() {
+        it('prioritises the React component (same-name-same-case-mixed.js)', function() {
+          this.render(hbs`{{react-component "same-name-same-case-mixed"}}`);
+
+          expect(
+            this.$()
+              .text()
+              .trim()
+          ).to.equal('My file name is "same-name-same-case-mixed.jsx"');
+        });
+
+        it('prioritises the React component (same-name-same-case-mixed.js) when rendering directly', function() {
+          this.render(hbs`{{same-name-ember}}`);
+
+          expect(
+            this.$()
+              .text()
+              .trim()
+          ).to.equal('My file name is "same-name-same-case-mixed.jsx"');
+        });
+      });
     });
   }
 );
