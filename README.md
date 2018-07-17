@@ -91,29 +91,21 @@ to React without the hard requirement to start with leaf components. It is
 highly recommended to have clean React component tree whenever possible for best
 performance.
 
-## Using File Name Convention for React
+## PascalCase File Naming
 
-React is unopinionated with file name convention. However, the majority of the
-community has still developed some conventions over time.
+You can name your React component files using either the Ember convention of
+[`kebab-case`](https://ember-cli.com/naming-conventions) or the React convention
+of [`PascalCase`](https://github.com/airbnb/javascript/tree/master/react#naming)
+.
 
-For React component files, the widely adopted convention is PascalCase,
-including
-[Airbnb](https://github.com/airbnb/javascript/tree/master/react#naming). So we
-have added support for this convention.
-
-In short, you can name your JSX files in `PascalCase`, in addition to
-`snake-case`.
 
 ```handlebars
 {{!-- Both `user-avatar.jsx` and `UserAvatar.jsx` work --}}
 {{user-avatar}}
 ```
 
-### Rendering in Template
-
-When using the `react-component` component, referencing your React components
-with `PascalCase` is also supported. However, due to the "at least one dash"
-policy, it won't work if the component name is used directly.
+Referencing your React components with `PascalCase` in handlebars is also
+supported when invoked using `react-component`.
 
 ```handlebars
 {{!-- OK! --}}
@@ -122,28 +114,11 @@ policy, it won't work if the component name is used directly.
 {{!-- OK! --}}
 {{react-component "UserAvatar"}}
 
-{{!-- OK! --}}
-{{user-avatar}}
-
-{{!-- NOT OK! --}}
-{{UserAvatar}}
+{{!-- Single worded components are OK too! --}}
+{{react-component "Avatar"}}
 ```
 
-### Single-worded Component
-
-Ember requires at least a dash for component names. So single-worded component
-(e.g. `Avatar`) cannot be used directly in Handlebars. However, you can still
-use single-worded component with `react-component` component.
-
-```handlebars
-{{!-- This won't work because Ember requires a dash for component --}}
-{{avatar}}
-
-{{!-- This works --}}
-{{react-component 'Avatar'}}
-```
-
-### React Components are Prioritised
+### React Components are Prioritized
 
 Whenever there is a conflict, component files with React-style convention will
 be used.
@@ -152,14 +127,15 @@ Examples:
 
 - When both `SameName.jsx` and `same-name.jsx` exist, `SameName.jsx` will be
   used
-- When both `SameName.jsx` and `same-name.js` (Ember) exist, `SameName.jsx` will
-  be used
+- When both `SameName.jsx` and `same-name.js` (Ember) exist, `SameName.jsx`
+  will be used
 
 #### Known issue
 
-If an Ember component and a React component has exactly the same name but different extension (`same-name.js` and
-`same-name.jsx`), the file with `.js` extension will be overwritten with the
-output of `same-name.jsx`. We are still looking at ways to resolve this.
+If an Ember component and a React component has exactly the same name but
+different extension (`same-name.js` and `same-name.jsx`), the file with `.js`
+extension will be overwritten with the output of `same-name.jsx`. We are still
+looking at ways to resolve this.
 
 ## Mini Todo List Example
 
