@@ -98,7 +98,6 @@ You can name your React component files using either the Ember convention of
 of [`PascalCase`](https://github.com/airbnb/javascript/tree/master/react#naming)
 .
 
-
 ```handlebars
 {{!-- Both `user-avatar.jsx` and `UserAvatar.jsx` work --}}
 {{user-avatar}}
@@ -137,11 +136,10 @@ different extension (`same-name.js` and `same-name.jsx`), the file with `.js`
 extension will be overwritten with the output of `same-name.jsx`. We are still
 looking at ways to resolve this.
 
-## Mini Todo List Example
+## A More Complete Example
 
-A more complete example which demonstrates how to handle actions from within
-React components and how to share state. To see it working run `ember server` in
-this repo.
+A more complete example which demonstrates data binding and how to handle
+actions from within React components.
 
 #### app/templates/application.hbs
 
@@ -152,41 +150,6 @@ this repo.
 }}
 
 Completed {{completedTodos.length}} todos
-```
-
-#### app/routes/application.js
-
-```javascript
-export default Ember.Route.extend({
-  model() {
-    return [
-      { id: 1, text: 'Buy groceries', isComplete: false },
-      { id: 2, text: 'Go to the gym', isComplete: false },
-      { id: 3, text: 'Read that book', isComplete: false },
-      { id: 4, text: 'Get glasses fixed', isComplete: false },
-    ];
-  },
-});
-```
-
-#### app/controllers/application.js
-
-```javascript
-export default Ember.Controller.extend({
-  completedTodos: Ember.computed.filterBy('model', 'isComplete'),
-
-  onToggle(todoId) {
-    let todos = this.get('model').map(todo => {
-      if (todo.id === todoId) {
-        todo.isComplete = !todo.isComplete;
-      }
-
-      return todo;
-    });
-
-    this.set('model', todos);
-  },
-});
 ```
 
 #### app/components/todo-list.jsx
