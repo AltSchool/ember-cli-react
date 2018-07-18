@@ -35,6 +35,23 @@ If you have installed `ember-cli-react` with the standard way then you should be
 fine. Otherwise, you will need to manually update the first line of
 `app/resolver.js` to `import Resolver from 'ember-cli-react/resolver';`.
 
+<details><summary><strong>Upgrading to 1.0</strong></summary>
+<p>
+
+[`ember-browserify`](https://github.com/ef4/ember-browserify) has been replaced
+with [`ember-auto-import`](https://github.com/ef4/ember-auto-import). To migrate
+to 1.0, there are several steps you need to take:
+
+1.  Remove `ember-browserify` from your project's `package.json` (if no other
+    addon is using).
+2.  Install latest `ember-cli-react` and make sure blueprint is run `ember generate ember-cli-react`.
+3.  Remove `npm:` prefix from all import statements.
+
+Then you should be good to go :)
+
+</p>
+</details>
+
 ## Usage
 
 Write your React component as usual:
