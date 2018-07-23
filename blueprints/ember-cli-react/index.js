@@ -2,6 +2,13 @@
 
 var pkg = require('../../package.json');
 
+function getDependencyVersion(packageJson, name) {
+  var dependencies = packageJson.dependencies;
+  var devDependencies = packageJson.devDependencies;
+
+  return dependencies[name] || devDependencies[name];
+}
+
 function getPeerDependencyVersion(packageJson, name) {
   var peerDependencies = packageJson.peerDependencies;
 
@@ -16,6 +23,10 @@ module.exports = {
   // Install react into host app
   afterInstall: function() {
     const packages = [
+      {
+        name: 'ember-auto-import',
+        target: getDependencyVersion(pkg, 'ember-auto-import'),
+      },
       {
         name: 'react',
         target: getPeerDependencyVersion(pkg, 'react'),
