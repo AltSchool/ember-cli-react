@@ -13,4 +13,10 @@ module.exports = {
 
     return tree;
   },
+
+  options: {
+    autoImport: {
+      devtool: 'inline-source-map',
+    },
+  },
 };
