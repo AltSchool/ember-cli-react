@@ -1,6 +1,6 @@
 ## [Unreleased]
 
-## [1.0.1] - 2018
+## [1.0.1] - 2018-10-04
 
 - Add `ember-auto-import` to support import of other react ecosystem libraries [#38](https://github.com/AltSchool/ember-cli-react/pull/38)
 
