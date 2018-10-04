@@ -1,6 +1,6 @@
 {
   "name": "ember-cli-react",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Use React component hierarchies in your Ember app.",
   "keywords": [
     "ember-addon"
