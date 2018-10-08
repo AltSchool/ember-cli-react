@@ -1,5 +1,9 @@
 ## [Unreleased]
 
+## [1.0.2] - 2018-10-08
+
+- Support React v16 as peer dependency [#41](https://github.com/AltSchool/ember-cli-react/pull/41)
+
 ## [1.0.1] - 2018-10-04
 
 - Add `ember-auto-import` to support import of other react ecosystem libraries [#38](https://github.com/AltSchool/ember-cli-react/pull/38)
