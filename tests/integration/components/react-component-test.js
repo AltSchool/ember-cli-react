@@ -23,7 +23,7 @@ describeComponent(
     it('uses babel features', function() {
       this.render(hbs`{{react-component "babel-features"}}`);
       expect(this.$('[data-test="allows-object-spread"]').text()).to.equal(
-        'supports clsss properties'
+        'supports class properties'
       );
     });
 

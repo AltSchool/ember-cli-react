@@ -1,7 +1,7 @@
 import React from 'react';
 
 class State {
-  message = 'supports clsss properties';
+  message = 'supports class properties';
 }
 
 export default function BabelFeatures() {
