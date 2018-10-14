@@ -20,6 +20,13 @@ describeComponent(
       expect(this.$()).to.have.length(1);
     });
 
+    it('uses babel features', function() {
+      this.render(hbs`{{react-component "babel-features"}}`);
+      expect(this.$('[data-test="allows-object-spread"]').text()).to.equal(
+        'supports clsss properties'
+      );
+    });
+
     it.skip('throws error when no component found', function() {
       expect(() => {
         this.render(hbs`{{react-component "missing-component"}}`);

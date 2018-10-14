@@ -33,6 +33,7 @@
   "author": "alex@altschool.com",
   "license": "MIT",
   "devDependencies": {
+    "babel-eslint": "10.0.1",
     "broccoli-asset-rev": "^2.4.5",
     "ember-ajax": "^3.0.0",
     "ember-cli": "~2.15.1",
@@ -59,10 +60,12 @@
     "husky": "^0.14.3",
     "lint-staged": "^5.0.0",
     "loader.js": "^4.2.3",
-    "prettier": "^1.9.2"
+    "prettier": "^1.9.2",
+    "babel-plugin-transform-class-properties": "6.24.1",
+    "babel-plugin-transform-object-rest-spread": "6.26.0"
   },
   "dependencies": {
-    "broccoli-react": "^0.8.0",
+    "broccoli-react": "eddhannay/broccoli-react#1399c761da19aff4492a521a1b4d53429433e499",
     "ember-auto-import": "^1.0.1",
     "ember-cli-babel": "^6.3.0",
     "react": "^15.5.4 || ^16.0.0",

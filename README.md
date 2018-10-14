@@ -210,6 +210,45 @@ export default class TodoItem extends React.Component {
 }
 ```
 
+## Object Rest Spread and Class Properties
+
+[Object Rest Spread]() and [Class Properties](https://babeljs.io/docs/en/babel-plugin-proposal-class-properties) are included in `create-react-app` and used in many React projects. To enable these features in your React components, you must configure the Babel compiler used by `ember-cli-react`. You can do this by passing `babelOptions` to `ember-cli-react` configurations.
+
+For Babel 6,
+
+1. Add Babel plugin packages to your project `babel-plugin-transform-object-rest-spread` and `babel-plugin-transform-class-properties`
+2. In `ember-cli-build.js` file, configure
+   ```js
+   let app = new EmberApp(defaults, {
+     'ember-cli-react': {
+       babelOptions: {
+         plugins: [
+           'transform-class-properties',
+           'transform-object-rest-spread',
+         ],
+       },
+     },
+   });
+   ```
+
+````
+For Babel 7,
+
+1. Install the transforms `npm install --save-dev @babel/plugin-proposal-object-rest-spread @babel/plugin-proposal-class-properties`
+2. Add these plugins to your `ember-cli-build.js` file
+ ```js
+ let app = new EmberAddon(defaults, {
+  'ember-cli-react': {
+    babelOptions: {
+      plugins: [
+        '@babel/plugin-proposal-object-rest-spread',
+        '@babel/plugin-proposal-class-properties'
+      ],
+    }
+  },
+});
+````
+
 ## What's Missing
 
 There is no React `link-to` equivalent for linking to Ember routes inside of
