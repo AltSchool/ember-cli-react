@@ -231,23 +231,23 @@ For Babel 6,
    });
    ```
 
-````
 For Babel 7,
 
 1. Install the transforms `npm install --save-dev @babel/plugin-proposal-object-rest-spread @babel/plugin-proposal-class-properties`
 2. Add these plugins to your `ember-cli-build.js` file
- ```js
- let app = new EmberAddon(defaults, {
+
+```js
+let app = new EmberAddon(defaults, {
   'ember-cli-react': {
     babelOptions: {
       plugins: [
         '@babel/plugin-proposal-object-rest-spread',
-        '@babel/plugin-proposal-class-properties'
+        '@babel/plugin-proposal-class-properties',
       ],
-    }
+    },
   },
 });
-````
+```
 
 ## What's Missing
 
