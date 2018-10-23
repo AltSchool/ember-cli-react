@@ -62,10 +62,14 @@
     "loader.js": "^4.2.3",
     "prettier": "^1.9.2",
     "babel-plugin-transform-class-properties": "6.24.1",
-    "babel-plugin-transform-object-rest-spread": "6.26.0"
+    "babel-plugin-transform-object-rest-spread": "6.26.0",
+    "broccoli-funnel": "2.0.1",
+    "broccoli-merge-trees": "3.0.1",
+    "ember-cli-version-checker": "^2.1.2"
   },
   "dependencies": {
-    "broccoli-react": "eddhannay/broccoli-react#1399c761da19aff4492a521a1b4d53429433e499",
+    "@babel/plugin-transform-react-jsx": "^7.0.0",
+    "babel-plugin-transform-react-jsx": "^6.24.1",
     "ember-auto-import": "^1.0.1",
     "ember-cli-babel": "^6.3.0",
     "react": "^15.5.4 || ^16.0.0",
