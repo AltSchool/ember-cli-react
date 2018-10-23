@@ -31,7 +31,7 @@ module.exports = {
           },
         });
 
-        // apply preprocessing from other babel plugins
+        // apply preprocessing from other babel plugins to the jsx files
         let processed = parent.registry
           .load('js')
           .filter(p => p.name !== 'ember-cli-react')

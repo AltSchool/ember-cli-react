@@ -212,7 +212,7 @@ export default class TodoItem extends React.Component {
 
 ## Object Rest Spread and Class Properties
 
-[Object Rest Spread]() and [Class Properties](https://babeljs.io/docs/en/babel-plugin-proposal-class-properties) are included in `create-react-app` and used in many React projects. To enable these features in your React components, you must configure the Babel compiler used by `ember-cli-react`. You can do this by passing `babelOptions` to `ember-cli-react` configurations.
+[Object Rest Spread]() and [Class Properties](https://babeljs.io/docs/en/babel-plugin-proposal-class-properties) are included in `create-react-app` and used in many React projects. To enable these features you must add respective transforms to Babel plugins setting in your `ember-cli-build.js`.
 
 For Babel 6,
 
@@ -220,13 +220,8 @@ For Babel 6,
 2. In `ember-cli-build.js` file, configure
    ```js
    let app = new EmberApp(defaults, {
-     'ember-cli-react': {
-       babelOptions: {
-         plugins: [
-           'transform-class-properties',
-           'transform-object-rest-spread',
-         ],
-       },
+     babel: {
+       plugins: ['transform-class-properties', 'transform-object-rest-spread'],
      },
    });
    ```
@@ -238,13 +233,11 @@ For Babel 7,
 
 ```js
 let app = new EmberAddon(defaults, {
-  'ember-cli-react': {
-    babelOptions: {
-      plugins: [
-        '@babel/plugin-proposal-object-rest-spread',
-        '@babel/plugin-proposal-class-properties',
-      ],
-    },
+  babel: {
+    plugins: [
+      '@babel/plugin-proposal-object-rest-spread',
+      '@babel/plugin-proposal-class-properties',
+    ],
   },
 });
 ```
