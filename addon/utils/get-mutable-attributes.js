@@ -30,8 +30,6 @@ if (isGlimmer) {
   ];
 }
 
-// Borrowing this from ember-cli-react.
-// https://github.com/AltSchool/ember-cli-react/blob/master/addon/utils/get-mutable-attributes.js
 export default function getMutableAttributes(attrs) {
   return Object.keys(attrs).reduce((acc, attr) => {
     acc[attr] = getMutValue(attrs[attr]);
