@@ -21,9 +21,9 @@ jobs:
       # Download and cache dependencies
       - restore_cache:
           keys:
-          - v1-dependencies-{{ checksum "package.json" }}
-          # fallback to using the latest cache if no exact match is found
-          - v1-dependencies-
+            - v1-dependencies-{{ checksum "package.json" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
       - run:
           name: Install Packages
           command: npm install
@@ -126,6 +126,24 @@ jobs:
           name: Run Tests
           command: ./node_modules/.bin/ember try:one ember-3.2 --skip-cleanup=true
 
+  test_3_4:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name: Run Tests
+          command: ./node_modules/.bin/ember try:one ember-3.4 --skip-cleanup=true
+
+  test_3_6:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name: Run Tests
+          command: ./node_modules/.bin/ember try:one ember-3.6 --skip-cleanup=true
+
   test_release:
     <<: *defaults
     steps:
@@ -134,7 +152,6 @@ jobs:
       - run:
           name: Run Tests
           command: ./node_modules/.bin/ember try:one ember-release --skip-cleanup=true
-
 
   test_beta:
     <<: *defaults
@@ -187,6 +204,12 @@ workflows:
           requires:
             - setup_environment
       - test_3_2:
+          requires:
+            - setup_environment
+      - test_3_4:
+          requires:
+            - setup_environment
+      - test_3_6:
           requires:
             - setup_environment
       - test_release:

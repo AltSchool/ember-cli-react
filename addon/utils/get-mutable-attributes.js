@@ -1,16 +1,21 @@
 import Ember from 'ember';
-import emberVersionInfo from './ember-version-info';
+import semver from 'semver';
 
-const { major, minor, isGlimmer } = emberVersionInfo();
+// Glimmer starts from v2.10
+const isGlimmer = semver.gte(Ember.VERSION, '2.10.0');
 
 let getMutValue;
 
 if (isGlimmer) {
-  // The module location changed since v3.2
-  let libPath =
-    major > 3 || (major == 3 && minor >= 2)
-      ? 'ember-views/lib/compat/attrs'
-      : 'ember-views/compat/attrs';
+  // The module location before v3.2
+  let libPath = 'ember-views/compat/attrs';
+
+  if (semver.gte(Ember.VERSION, '3.6.0')) {
+    libPath = '@ember/-internals/views/lib/compat/attrs';
+  } else if (semver.gte(Ember.VERSION, '3.2.0')) {
+    libPath = 'ember-views/lib/compat/attrs';
+  }
+
   const { MUTABLE_CELL } = Ember.__loader.require(libPath);
   getMutValue = value => {
     if (value && value[MUTABLE_CELL]) {
