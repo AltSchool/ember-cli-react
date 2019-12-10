@@ -1,6 +1,6 @@
 {
-  "name": "ember-cli-react",
-  "version": "1.0.2",
+  "name": "ember-simple-react",
+  "version": "1.0.3",
   "description": "Use React component hierarchies in your Ember app.",
   "keywords": [
     "ember-addon"
@@ -26,11 +26,10 @@
       "git add"
     ]
   },
-  "repository": "https://github.com/AltSchool/ember-cli-react",
+  "repository": "https://github.com/pswai/ember-simple-react",
   "engines": {
     "node": ">= 4.0.0"
   },
-  "author": "alex@altschool.com",
   "license": "MIT",
   "devDependencies": {
     "broccoli-asset-rev": "^2.4.5",

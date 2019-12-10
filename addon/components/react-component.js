@@ -3,9 +3,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import YieldWrapper from './react-component/yield-wrapper';
 
-import getMutableAttributes from 'ember-cli-react/utils/get-mutable-attributes';
-import hasBlock from 'ember-cli-react/utils/has-block';
-import lookupFactory from 'ember-cli-react/utils/lookup-factory';
+import getMutableAttributes from 'ember-simple-react/utils/get-mutable-attributes';
+import hasBlock from 'ember-simple-react/utils/has-block';
+import lookupFactory from 'ember-simple-react/utils/lookup-factory';
 
 const { get } = Ember;
 

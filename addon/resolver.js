@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import Resolver from 'ember-resolver';
 
-import ReactComponent from 'ember-cli-react/components/react-component';
+import ReactComponent from 'ember-simple-react/components/react-component';
 
 const { get } = Ember;
 

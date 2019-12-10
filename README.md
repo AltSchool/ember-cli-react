@@ -1,14 +1,8 @@
-**Experimental Addon**
+**Note:** This is a fork of https://github.com/AltSchool/ember-cli-react due to its inactivity.
 
-This was built as a prototype to evaluate using React inside of our Ember apps.
-We are not yet using it in production. PRs and constructive questions and
-comments via [GitHub
-issues](https://github.com/AltSchool/ember-cli-react/issues/new) are highly
-encouraged.
+# ember-simple-react
 
-# ember-cli-react
-
-[![Circle CI](https://circleci.com/gh/AltSchool/ember-cli-react.svg?style=shield)](https://circleci.com/gh/AltSchool/ember-cli-react)
+[![Circle CI](https://circleci.com/gh/pswai/ember-simple-react.svg?style=shield)](https://circleci.com/gh/pswai/ember-simple-react)
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 
 Use clean React component hierarchies inside your Ember app.
@@ -18,22 +12,22 @@ Use clean React component hierarchies inside your Ember app.
 Install the addon in your app:
 
 ```
-ember install ember-cli-react
+ember install ember-simple-react
 ```
 
 If you prefer npm/yarn install (the following is similar with above):
 
 ```
-yarn add --dev ember-cli-react
+yarn add --dev ember-simple-react
 
 # This triggers addon blueprint to do necessary setup
-ember generate ember-cli-react
+ember generate ember-simple-react
 ```
 
-**NOTE**: `ember-cli-react` relies on a custom resolver to discover components.
-If you have installed `ember-cli-react` with the standard way then you should be
+**NOTE**: `ember-simple-react` relies on a custom resolver to discover components.
+If you have installed `ember-simple-react` with the standard way then you should be
 fine. Otherwise, you will need to manually update the first line of
-`app/resolver.js` to `import Resolver from 'ember-cli-react/resolver';`.
+`app/resolver.js` to `import Resolver from 'ember-simple-react/resolver';`.
 
 <details><summary><strong>Upgrading to 1.0</strong></summary>
 <p>
@@ -44,7 +38,7 @@ to 1.0, there are several steps you need to take:
 
 1.  Remove `ember-browserify` from your project's `package.json` (if no other
     addon is using).
-2.  Install latest `ember-cli-react` and make sure blueprint is run `ember generate ember-cli-react`.
+2.  Install latest `ember-simple-react` and make sure blueprint is run `ember generate ember-simple-react`.
 3.  Remove `npm:` prefix from all import statements.
 
 Then you should be good to go :)
@@ -71,7 +65,7 @@ Then render your component in a handlebars template:
 {{say-hi name="Alex"}}
 ```
 
-**NOTE**: Currently, `ember-cli-react` recognizes React components with `.jsx`
+**NOTE**: Currently, `ember-simple-react` recognizes React components with `.jsx`
 extension only.
 
 ## Block Form

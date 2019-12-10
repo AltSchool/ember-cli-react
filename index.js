@@ -4,7 +4,7 @@
 const react = require('broccoli-react');
 
 module.exports = {
-  name: 'ember-cli-react',
+  name: 'ember-simple-react',
 
   preprocessTree: function(type, tree) {
     if (type === 'js') {
