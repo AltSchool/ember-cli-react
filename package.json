@@ -1,6 +1,6 @@
 {
   "name": "ember-simple-react",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Use React component hierarchies in your Ember app.",
   "keywords": [
     "ember-addon"

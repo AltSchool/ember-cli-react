@@ -1,5 +1,13 @@
 ## [Unreleased]
 
+## [1.0.4] - 2018-12-10
+
+- Switch back to yarn for now
+
+## [1.0.3] - 2019-12-10
+
+- Support Ember 3.6 [#48](https://github.com/pswai/ember-simple-react/pull/48)
+
 ## [1.0.2] - 2018-10-08
 
 - Support React v16 as peer dependency [#41](https://github.com/pswai/ember-simple-react/pull/41)
