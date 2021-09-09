@@ -1,6 +1,4 @@
-import Ember from 'ember';
-
-const { getOwner } = Ember;
+import { getOwner } from '@ember/application';
 
 // See http://emberjs.com/deprecations/v2.x/#toc_injected-container-access
 export default function lookupFactory(object, name) {

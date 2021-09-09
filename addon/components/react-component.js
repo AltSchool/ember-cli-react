@@ -1,4 +1,8 @@
-import Ember from 'ember';
+import { classify } from '@ember/string';
+import { typeOf } from '@ember/utils';
+import { reads } from '@ember/object/computed';
+import Component from '@ember/component';
+import { get } from '@ember/object';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import YieldWrapper from './react-component/yield-wrapper';
@@ -7,9 +11,7 @@ import getMutableAttributes from 'ember-simple-react/utils/get-mutable-attribute
 import hasBlock from 'ember-simple-react/utils/has-block';
 import lookupFactory from 'ember-simple-react/utils/lookup-factory';
 
-const { get } = Ember;
-
-const ReactComponent = Ember.Component.extend({
+const ReactComponent = Component.extend({
   /**
     The React component that this Ember component should wrap.
 
@@ -17,7 +19,7 @@ const ReactComponent = Ember.Component.extend({
     @type React.Component | Function | String
     @default null
    */
-  reactComponent: Ember.computed.reads('_reactComponent'),
+  reactComponent: reads('_reactComponent'),
 
   didRender: function() {
     this.renderReactComponent();
@@ -27,14 +29,14 @@ const ReactComponent = Ember.Component.extend({
     const componentClassOrName = get(this, 'reactComponent');
     let componentClass;
 
-    if (Ember.typeOf(componentClassOrName) === 'string') {
+    if (typeOf(componentClassOrName) === 'string') {
       componentClass = lookupFactory(
         this,
         `react-component:${componentClassOrName}`
       );
 
       // Set `displayName` so that it is visible in React devtools
-      componentClass.displayName = Ember.String.classify(componentClassOrName);
+      componentClass.displayName = classify(componentClassOrName);
     } else {
       componentClass = componentClassOrName;
     }

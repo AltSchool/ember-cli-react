@@ -1,14 +1,17 @@
-/* eslint-env node */
 'use strict';
 
-const react = require('broccoli-react');
+const babel = require('broccoli-babel-transpiler');
 
 module.exports = {
   name: 'ember-simple-react',
 
   preprocessTree: function(type, tree) {
     if (type === 'js') {
-      tree = react(tree, { transform: { es6module: true } });
+      const babelOptions = {
+        filterExtensions: ['jsx'],
+        presets: ['@babel/preset-react'],
+      };
+      return babel(tree, babelOptions);
     }
 
     return tree;

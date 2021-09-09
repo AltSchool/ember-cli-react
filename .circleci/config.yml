@@ -9,7 +9,7 @@
 # Default values
 defaults: &defaults
   docker:
-    - image: circleci/node:6-browsers
+    - image: circleci/node:10-browsers
   working_directory: ~/ember-simple-react
 
 version: 2
@@ -126,14 +126,14 @@ jobs:
           name: Run Tests
           command: ./node_modules/.bin/ember try:one ember-3.2 --skip-cleanup=true
 
-  test_3_4:
+  test_lts_3_4:
     <<: *defaults
     steps:
       - attach_workspace:
           at: .
       - run:
           name: Run Tests
-          command: ./node_modules/.bin/ember try:one ember-3.4 --skip-cleanup=true
+          command: ./node_modules/.bin/ember try:one ember-lts-3.4 --skip-cleanup=true
 
   test_3_6:
     <<: *defaults
@@ -143,6 +143,87 @@ jobs:
       - run:
           name: Run Tests
           command: ./node_modules/.bin/ember try:one ember-3.6 --skip-cleanup=true
+
+  test_lts_3_8:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name: Run Tests
+          command: ./node_modules/.bin/ember try:one ember-lts-3.8 --skip-cleanup=true
+
+  test_lts_3_12:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name: Run Tests
+          command: ./node_modules/.bin/ember try:one ember-lts-3.12 --skip-cleanup=true
+
+  test_3_13:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name: Run Tests
+          command: ./node_modules/.bin/ember try:one ember-3.13 --skip-cleanup=true
+
+  test_3_14:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name: Run Tests
+          command: ./node_modules/.bin/ember try:one ember-3.14 --skip-cleanup=true
+
+  test_3_15:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name: Run Tests
+          command: ./node_modules/.bin/ember try:one ember-3.15 --skip-cleanup=true
+
+  test_lts_3_16:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name: Run Tests
+          command: ./node_modules/.bin/ember try:one ember-lts-3.16 --skip-cleanup=true
+
+  test_lts_3_20:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name: Run Tests
+          command: ./node_modules/.bin/ember try:one ember-lts-3.20 --skip-cleanup=true
+
+  test_lts_3_24:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name: Run Tests
+          command: ./node_modules/.bin/ember try:one ember-lts-3.24 --skip-cleanup=true
+
+  test_lts_3_28:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name: Run Tests
+          command: ./node_modules/.bin/ember try:one ember-lts-3.28 --skip-cleanup=true
 
   test_release:
     <<: *defaults
@@ -206,18 +287,45 @@ workflows:
       - test_3_2:
           requires:
             - setup_environment
-      - test_3_4:
+      - test_lts_3_4:
           requires:
             - setup_environment
       - test_3_6:
           requires:
             - setup_environment
+      - test_lts_3_8:
+          requires:
+            - setup_environment
+      - test_lts_3_12:
+          requires:
+            - setup_environment
+      - test_3_13:
+          requires:
+            - setup_environment
+      - test_3_14:
+          requires:
+            - setup_environment
+      - test_3_15:
+          requires:
+            - setup_environment
+      - test_lts_3_16:
+          requires:
+            - setup_environment
+      - test_lts_3_20:
+          requires:
+            - setup_environment
+      - test_lts_3_24:
+          requires:
+            - setup_environment
+      - test_lts_3_28:
+          requires:
+            - setup_environment
       - test_release:
           requires:
             - setup_environment
-      - test_beta:
-          requires:
-            - setup_environment
-      - test_canary:
-          requires:
-            - setup_environment
+      # - test_beta:
+      #     requires:
+      #       - setup_environment
+      # - test_canary:
+      #     requires:
+      #       - setup_environment
