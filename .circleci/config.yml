@@ -10,7 +10,7 @@
 defaults: &defaults
   docker:
     - image: circleci/node:10-browsers
-  working_directory: ~/ember-simple-react
+  working_directory: ~/ember-cli-react-fork
 
 version: 2
 jobs:

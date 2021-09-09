@@ -16,7 +16,7 @@ function getPeerDependencyVersion(packageJson, name) {
 }
 
 module.exports = {
-  description: 'Install ember-simple-react dependencies into your app.',
+  description: 'Install ember-cli-react dependencies into your app.',
 
   normalizeEntityName: function() {},
 

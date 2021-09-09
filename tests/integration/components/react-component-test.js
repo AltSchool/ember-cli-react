@@ -248,7 +248,7 @@ describe('Integration: ReactComponent', function() {
     expect(this.element.querySelectorAll('.FancyButton')).to.have.length(1);
   });
 
-  describe('with ember-simple-react resolver', function() {
+  describe('with ember-cli-react resolver', function() {
     it('can render react components directly', async function() {
       await render(hbs`
         {{say-hi name="Morgan"}}

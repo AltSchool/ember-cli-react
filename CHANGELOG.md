@@ -1,5 +1,12 @@
 ## [Unreleased]
 
+## [2.0.0] - 2021-09-09
+
+- **Breaking change:** bump minimum NodeJS to v10
+- **Breaking change:** replace `broccoli-react` with `broccoli-babel-transpiler` [#50](https://github.com/AltSchool/ember-cli-react/pull/50)
+- **Breaking change:** rename npm package to `ember-cli-react-fork`
+- Support React v17 as peer dependency
+
 ## [1.0.4] - 2018-12-10
 
 - Switch back to yarn for now
