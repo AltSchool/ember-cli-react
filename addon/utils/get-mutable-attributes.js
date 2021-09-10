@@ -1,34 +1,52 @@
-import { VERSION } from '@ember/version';
 import Ember from 'ember';
-import semver from 'semver';
 
-// Glimmer starts from v2.10
-const isGlimmer = semver.gte(VERSION, '2.10.0');
-
-let getMutValue;
-
-if (isGlimmer) {
-  // The module location before v3.2
-  let libPath = 'ember-views/compat/attrs';
-
-  if (semver.gte(VERSION, '3.6.0')) {
-    libPath = '@ember/-internals/views/lib/compat/attrs';
-  } else if (semver.gte(VERSION, '3.2.0')) {
-    libPath = 'ember-views/lib/compat/attrs';
-  }
-
-  const { MUTABLE_CELL } = Ember.__loader.require(libPath);
-  getMutValue = value => {
+function extractGlimmer(module) {
+  const { MUTABLE_CELL } = module;
+  return value => {
     if (value && value[MUTABLE_CELL]) {
       return value.value;
     } else {
       return value;
     }
   };
-} else {
-  getMutValue = Ember.__loader.require('ember-htmlbars/hooks/get-value')[
-    'default'
-  ];
+}
+
+const candidates = [
+  {
+    // >= 3.6.0
+    path: '@ember/-internals/views/lib/compat/attrs',
+    extract: extractGlimmer,
+  },
+  {
+    // >= 3.2.0
+    path: 'ember-views/lib/compat/attrs',
+    extract: extractGlimmer,
+  },
+  {
+    // >= 2.10.0 (Glimmer)
+    path: 'ember-views/compat/attrs',
+    extract: extractGlimmer,
+  },
+  {
+    // < 2.10.0 (Before Glimmer)
+    path: 'ember-htmlbars/hooks/get-value',
+    extract: module => {
+      return module['default'];
+    },
+  },
+];
+
+let getMutValue;
+
+for (const candidate of candidates) {
+  const { path, extract } = candidate;
+  try {
+    const module = Ember.__loader.require(path);
+    getMutValue = extract(module);
+    break;
+  } catch (e) {
+    continue;
+  }
 }
 
 export default function getMutableAttributes(attrs) {
