@@ -1,5 +1,9 @@
 ## [Unreleased]
 
+## [2.0.1] - 2021-09-11
+
+- Try importing Ember internals one by one instead of using hardcoded version number.
+
 ## [2.0.0] - 2021-09-09
 
 - **Breaking change:** bump minimum NodeJS to v10

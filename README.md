@@ -1,5 +1,5 @@
 **Note:** This is a fork of https://github.com/AltSchool/ember-cli-react due to its inactivity.
-It uses the same addon name so
+It uses the same addon name so it is almost a drop-in replacement.
 
 # ember-cli-react-fork
 
@@ -13,13 +13,9 @@ Use clean React component hierarchies inside your Ember app.
 Install the addon in your app:
 
 ```
-ember install ember-cli-react-fork
-```
-
-If you prefer npm/yarn install (the following is similar with above):
-
-```
 yarn add --dev ember-cli-react-fork
+# OR
+npm i -D ember-cli-react-fork
 
 # This triggers addon blueprint to do necessary setup
 ember generate ember-cli-react
