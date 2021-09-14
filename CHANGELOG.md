@@ -1,5 +1,24 @@
 ## [Unreleased]
 
+## [2.0.1] - 2021-09-11
+
+- Try importing Ember internals one by one instead of using hardcoded version number.
+
+## [2.0.0] - 2021-09-09
+
+- **Breaking change:** bump minimum NodeJS to v10
+- **Breaking change:** replace `broccoli-react` with `broccoli-babel-transpiler` [#50](https://github.com/AltSchool/ember-cli-react/pull/50)
+- **Breaking change:** rename npm package to `ember-cli-react-fork`
+- Support React v17 as peer dependency
+
+## [1.0.4] - 2018-12-10
+
+- Switch back to yarn for now
+
+## [1.0.3] - 2019-12-10
+
+- Support Ember 3.6 [#48](https://github.com/AltSchool/ember-cli-react/pull/48)
+
 ## [1.0.2] - 2018-10-08
 
 - Support React v16 as peer dependency [#41](https://github.com/AltSchool/ember-cli-react/pull/41)

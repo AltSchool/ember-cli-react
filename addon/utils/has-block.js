@@ -1,25 +1,25 @@
+import { get } from '@ember/object';
 import Ember from 'ember';
-import emberVersionInfo from './ember-version-info';
 
-const { major, minor, isGlimmer } = emberVersionInfo();
+// Not all versions of Ember can get this early.
+// For some we need to compute at runtime.
+const candidates = [
+  // >= 2.10.0 (Glimmer)
+  'ember-glimmer/component',
+
+  // < 2.10.0 (Before Glimmer)
+  'ember-htmlbars/component',
+];
 
 let hasBlockSymbol;
 
-try {
-  if (major > 3 || (major == 3 && minor >= 1)) {
-    // Ember-glimmer moved to TypeScript since v3.1
-    // Do nothing since the symbol is not exported
-  } else if (isGlimmer) {
-    hasBlockSymbol = Ember.__loader.require('ember-glimmer/component')[
-      'HAS_BLOCK'
-    ];
-  } else {
-    hasBlockSymbol = Ember.__loader.require('ember-htmlbars/component')[
-      'HAS_BLOCK'
-    ];
+for (const candidate of candidates) {
+  try {
+    hasBlockSymbol = Ember.__loader.require(candidate)['HAS_BLOCK'];
+    break;
+  } catch (e) {
+    continue;
   }
-} catch (e) {
-  // Fallback to use runtime check
 }
 
 // NOTE: I really don't know how to test this
@@ -33,5 +33,5 @@ export default function hasBlock(emberComponent) {
     );
   }
 
-  return Ember.get(emberComponent, hasBlockSymbol);
+  return get(emberComponent, hasBlockSymbol);
 }

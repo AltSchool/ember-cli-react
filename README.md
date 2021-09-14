@@ -1,14 +1,9 @@
-**Experimental Addon**
+**Note:** This is a fork of https://github.com/AltSchool/ember-cli-react due to its inactivity.
+It uses the same addon name so it is almost a drop-in replacement.
 
-This was built as a prototype to evaluate using React inside of our Ember apps.
-We are not yet using it in production. PRs and constructive questions and
-comments via [GitHub
-issues](https://github.com/AltSchool/ember-cli-react/issues/new) are highly
-encouraged.
+# ember-cli-react-fork
 
-# ember-cli-react
-
-[![Circle CI](https://circleci.com/gh/AltSchool/ember-cli-react.svg?style=shield)](https://circleci.com/gh/AltSchool/ember-cli-react)
+[![Circle CI](https://circleci.com/gh/pswai/ember-cli-react-fork.svg?style=shield)](https://circleci.com/gh/pswai/ember-cli-react-fork)
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 
 Use clean React component hierarchies inside your Ember app.
@@ -18,13 +13,9 @@ Use clean React component hierarchies inside your Ember app.
 Install the addon in your app:
 
 ```
-ember install ember-cli-react
-```
-
-If you prefer npm/yarn install (the following is similar with above):
-
-```
-yarn add --dev ember-cli-react
+yarn add --dev ember-cli-react-fork
+# OR
+npm i -D ember-cli-react-fork
 
 # This triggers addon blueprint to do necessary setup
 ember generate ember-cli-react

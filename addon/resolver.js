@@ -1,9 +1,8 @@
-import Ember from 'ember';
+import { classify } from '@ember/string';
+import { get } from '@ember/object';
 import Resolver from 'ember-resolver';
 
 import ReactComponent from 'ember-cli-react/components/react-component';
-
-const { get } = Ember;
 
 export default Resolver.extend({
   // `resolveComponent` is triggered when rendering a component in template.
@@ -51,7 +50,7 @@ export default Resolver.extend({
 
     // Convert the compnent name while preserving namespaces
     const parts = originalName.split('/');
-    parts[parts.length - 1] = Ember.String.classify(parts[parts.length - 1]);
+    parts[parts.length - 1] = classify(parts[parts.length - 1]);
     const newName = parts.join('/');
 
     const parsedNameWithPascalCase = Object.assign({}, parsedName, {
